@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
+//import Redirect to redirect on login
+//import Link for linking navigation
 import { Link,Redirect } from 'react-router-dom'
+//import unique style for login
 import './css/style.css'
+//import logo from images
 import logo from './images/logo.png'
 export class Login extends Component {
   constructor (props) {
     super(props);
+    //Use to monior states
     this.state = {
       email:'',
       password:'',
@@ -13,6 +18,7 @@ export class Login extends Component {
     this.handleChange = this.handleChange(this)
   }
   handleSubmit () {
+    //Change states using setState
     this.setState({redirect:true})
   }
   handleChange (event) {

@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-export default class Home extends Component {
+import {browserHistory } from 'react-router-dom'
+export class Home extends Component {
   render() {
     return (
-      <div>
-        <h2>Home Page</h2>
+      <div className="container">
+        <h2 className="btn btn-danger">Home Page</h2>
       </div>
     );
   }
