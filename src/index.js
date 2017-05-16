@@ -17,9 +17,9 @@ render((
   //Render different routes
   <BrowserRouter history ={browserHistory} >
     <div>
+      <Header />
       <Route path={"/login"} component={Login}></Route>
       <Switch>
-      <Header />
       <Route exact path={"/"} component={App} />
       <Route path={'/home'} component={Home} />
       <Route path={"/aboutme"} component={AboutMe}/>

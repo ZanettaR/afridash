@@ -76,11 +76,11 @@ export class Header extends Component {
                           <span className="caret"></span></a>
                           <ul className="dropdown-menu dropdown-user pull-right">
                               <li><Link to="/aboutme"><i className="fa fa-users"></i>My Profile</Link></li>
-                              <li><Link to="/profile?f_name=<?php echo $_SESSION['first_name']?>&l_name=<?php echo $_SESSION['last_name']?>"><i className="fa fa-user"></i>My Wall</Link></li>
+                              <li><Link to="/profile/:_id/"><i className="fa fa-user"></i>My Wall</Link></li>
                               <li><Link to="/tasks"><i className="fa fa-tasks"></i>My Tasks</Link></li>
                               <li><Link to="/registered_classes"><i className="fa fa-book"></i>My Classes</Link></li>
                               <li className="divider"></li>
-                              <li><Link to="?logout=true"><i className="fa fa-key"></i>Log Out</Link></li>
+                              <li><Link to="/logout"><i className="fa fa-key"></i>Log Out</Link></li>
                           </ul>
                       </li>
 
@@ -97,12 +97,12 @@ export class Header extends Component {
               <div className="sidebar-collapse menu-scroll">
                   <ul id="side-menu" className="nav">
                        <div className="clearfix"></div>
-                      <li id ="panoramicview" className="active"><a href="index.php"><i className="fa fa-tachometer fa-fw">
+                      <li id ="panoramicview" className="active"><Link to="/"><i className="fa fa-tachometer fa-fw">
                           <div className="icon-bg bg-orange"></div>
-                      </i><span className="menu-title">Dashboard</span></a></li>
-                              <li id="futureplan"><a href="virtualadvisor.php"><i className="fa fa-graduation-cap fa-fw">
+                      </i><span className="menu-title">Dashboard</span></Link></li>
+                              <li id="futureplan"><Link to="/advising"><i className="fa fa-graduation-cap fa-fw">
                           <div className="icon-bg bg-pink"></div>
-                      </i><span className="menu-title">Virtual Advisor</span></a>
+                      </i><span className="menu-title">Virtual Advisor</span></Link>
                       </li>
                        <li id="ikulabs"><a target="_blank" href="http://resourcenet.afri-dash.com"><i className="fa fa-suitcase" aria-hidden="true"></i><span className="menu-title">ResourceNet</span></a>
                       </li>
@@ -116,17 +116,17 @@ export class Header extends Component {
                       </i><span className="menu-title">Friends</span><span className="fa arrow"></span></a>
                           <ul className="nav nav-second-level scroll-forums"></ul>
                       </li>
-                      <li id="bayelsagrade"><a href="grades.php"><i className="fa fa-graduation-cap fa-fw">
+                      <li id="bayelsagrade"><Link to="/grades"><i className="fa fa-graduation-cap fa-fw">
                           <div className="icon-bg bg-pink"></div>
-                      </i><span className="menu-title">Grades</span></a>
+                      </i><span className="menu-title">Grades</span></Link>
                       </li>
-                      <li id="yenagoapresent"><a href="classes.php"><i className="glyphicon-plus">
+                      <li id="yenagoapresent"><Link to="/classes"><i className="glyphicon-plus">
                           <div className="icon-bg bg-pink"></div>
-                      </i><span className="menu-title">Class Roster</span></a>
+                      </i><span className="menu-title">Class Roster</span></Link>
                       </li>
-                      <li id="perewarilendar"><a href="calender.php"><i className="fa fa-calendar fa-fw">
+                      <li id="perewarilendar"><Link to="/calander"><i className="fa fa-calendar fa-fw">
                           <div className="icon-bg bg-grey"></div>
-                      </i><span className="menu-title">My Calender</span></a>
+                      </i><span className="menu-title">My Calender</span></Link>
                       </li>
                   </ul>
               </div>
