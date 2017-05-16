@@ -4,7 +4,7 @@ import { Link,Redirect } from 'react-router-dom'
 
 import logo from './images/logo.png'
 import './css/style.css'
-import'./css/font-awesome.min.css'
+import './css/font-awesome.min.css'
 import './css/animate.css'
 import './css/all.css'
 import './css/main.css'
@@ -23,7 +23,7 @@ export class Header extends Component {
   render(){
     return (
       <div>
-          <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+          <a id="totop" href="#"><i className="fa fa-angle-up"></i></a>
           <div style={{marginBottom:50}}></div>
           <div id="header-topbar-option-demo" className="page-header-topbar">
               <nav id="topbar" role="navigation" data-step="3" className="navbar navbar-default navbar-fixed-top">
@@ -96,7 +96,6 @@ export class Header extends Component {
                   data-position="right" className="navbar-default navbar-static-side">
               <div className="sidebar-collapse menu-scroll">
                   <ul id="side-menu" className="nav">
-
                        <div className="clearfix"></div>
                       <li id ="panoramicview" className="active"><a href="index.php"><i className="fa fa-tachometer fa-fw">
                           <div className="icon-bg bg-orange"></div>
@@ -112,48 +111,23 @@ export class Header extends Component {
                       </i><span className="menu-title">Forums</span><span className="fa arrow"></span></a>
                           <ul className="nav nav-second-level scroll-forums">  </ul>
                       </li>
-
                       <li id="yingifriends"><a href="#"><i className="fa fa-users fa-fw">
                           <div className="icon-bg bg-pink"></div>
                       </i><span className="menu-title">Friends</span><span className="fa arrow"></span></a>
                           <ul className="nav nav-second-level scroll-forums"></ul>
                       </li>
-                      <li id="uzomacalender"><a href="calender.php"><i className="fa fa-calendar fa-fw">
-                          <div className="icon-bg bg-grey"></div>
-                      </i><span className="menu-title">My Calender</span></a>
-
-                      </li>
-
-                              <li id="bayelsagrade"><a href="grades.php"><i className="fa fa-graduation-cap fa-fw">
+                      <li id="bayelsagrade"><a href="grades.php"><i className="fa fa-graduation-cap fa-fw">
                           <div className="icon-bg bg-pink"></div>
                       </i><span className="menu-title">Grades</span></a>
                       </li>
-
                       <li id="yenagoapresent"><a href="classes.php"><i className="glyphicon-plus">
                           <div className="icon-bg bg-pink"></div>
                       </i><span className="menu-title">Class Roster</span></a>
                       </li>
-                      <li id="igbirikipadimen"><a href="#"><i className="fa fa-users fa-fw">
-                          <div className="icon-bg bg-pink"></div>
-                      </i><span className="menu-title">Friends</span><span className="fa arrow"></span></a>
-                          <ul className="nav nav-second-level">
-
-                              </ul>
-                      </li>
-
-                      <li id="ogirikiforums"><a href="#"><i className="fa fa-comments fa-fw">
-                          <div className="icon-bg bg-pink"></div>
-                      </i><span className="menu-title">Forums</span><span className="fa arrow"></span></a>
-                          <ul className="nav nav-second-level"></ul>
-                      </li>
-
                       <li id="perewarilendar"><a href="calender.php"><i className="fa fa-calendar fa-fw">
                           <div className="icon-bg bg-grey"></div>
                       </i><span className="menu-title">My Calender</span></a>
-
                       </li>
-
-
                   </ul>
               </div>
           </nav>
