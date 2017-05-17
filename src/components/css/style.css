@@ -88,7 +88,7 @@ h1{
 form {
   padding: 20px 0;
   position: relative;
-  
+
   z-index: 2;
 }
 
@@ -136,7 +136,7 @@ input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid
     background: url('../images/un.png') no-repeat scroll 10px 1px;
     background-size: 45px 45px;
   padding-left:30px;
-    
+
 }
 
 .pwIcon{
@@ -149,7 +149,7 @@ input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid
   float: center;
   width: 100%;
   margin: 2rem 0 1rem;
-  
+
 
   color:black;
   position: relative;
@@ -274,7 +274,7 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(4) {
   left: 40%;
-  
+
   border-radius: 50%;
   -webkit-animation-duration: 22s;
           animation-duration: 22s;
@@ -286,7 +286,7 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(6) {
   left: 60%;
-  
+
   border-radius: 50%;
   -webkit-animation-delay: 3s;
           animation-delay: 3s;
@@ -294,14 +294,14 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(7) {
   left: 32%;
-  
+
   border-radius: 50%;
   -webkit-animation-delay: 7s;
           animation-delay: 7s;
 }
 .bg-bubbles li:nth-child(8) {
   left: 15%;
-  
+
   border-radius: 50%;
   -webkit-animation-delay: 15s;
           animation-delay: 15s;
@@ -310,7 +310,7 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(9) {
   left: 25%;
- 
+
   border-radius: 50%;
   -webkit-animation-delay: 2s;
           animation-delay: 2s;
@@ -320,7 +320,7 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(10) {
   left: 90%;
-  
+
   border-radius: 50%;
   -webkit-animation-delay: 11s;
           animation-delay: 11s;
@@ -331,7 +331,7 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(12) {
   left: 20%;
-  
+
   border-radius: 50%;
   -webkit-animation-delay: 2s;
           animation-delay: 2s;
@@ -340,14 +340,14 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(13) {
   left: 25%;
-    
+
   border-radius: 50%;
   -webkit-animation-delay: 4s;
           animation-delay: 4s;
 }
 .bg-bubbles li:nth-child(14) {
   left: 40%;
-  
+
   border-radius: 50%;
   -webkit-animation-duration: 22s;
           animation-duration: 22s;
@@ -359,7 +359,7 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(16) {
   left: 80%;
-  
+
   border-radius: 50%;
   -webkit-animation-delay: 3s;
           animation-delay: 3s;
@@ -367,14 +367,14 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(17) {
   left: 32%;
- 
+
   border-radius: 50%;
   -webkit-animation-delay: 7s;
           animation-delay: 7s;
 }
 .bg-bubbles li:nth-child(18) {
   left: 55%;
- 
+
   border-radius: 50%;
   -webkit-animation-delay: 15s;
           animation-delay: 15s;
@@ -393,7 +393,7 @@ form button:hover {
 }
 .bg-bubbles li:nth-child(20) {
   left: 90%;
-  
+
   border-radius: 50%;
   -webkit-animation-delay: 11s;
           animation-delay: 11s;
@@ -462,3 +462,45 @@ p{
   list-style: none;
 }
 
+ #cf {
+  position:relative;
+  height:281px;
+  width:450px;
+  margin:0 auto;
+  bottom: 10px;
+}
+
+#cf img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+#cf img.top:hover {
+  opacity:0;
+}
+@keyframes cfFadeInOut {
+  0% {
+  opacity:1;
+}
+45% {
+opacity:1;
+}
+55% {
+opacity:0;
+}
+100% {
+opacity:0;
+}
+}
+
+#cf img.top {
+animation-name: cfFadeInOut;
+animation-timing-function: ease-in-out;
+animation-iteration-count: infinite;
+animation-duration: 10s;
+animation-direction: alternate;
+}

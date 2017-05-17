@@ -76,7 +76,7 @@ export class Header extends Component {
                           <span className="caret"></span></a>
                           <ul className="dropdown-menu dropdown-user pull-right">
                               <li><Link to="/aboutme"><i className="fa fa-users"></i>My Profile</Link></li>
-                              <li><Link to="/profile/:_id/"><i className="fa fa-user"></i>My Wall</Link></li>
+                              <li><Link to="/profile"><i className="fa fa-user"></i>My Wall</Link></li>
                               <li><Link to="/tasks"><i className="fa fa-tasks"></i>My Tasks</Link></li>
                               <li><Link to="/registered_classes"><i className="fa fa-book"></i>My Classes</Link></li>
                               <li className="divider"></li>

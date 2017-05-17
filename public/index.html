@@ -25,7 +25,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Afridash</title>
   </head>
   <body>
     <div id="root"></div>
@@ -217,6 +217,14 @@ $("#messagesContainer").click(function()
 //return false;
 });
 
+});
+$(document).ready(function(){
+    $("[data-toggle=popover]").popover({
+    html: true,
+	content: function() {
+          return $('#popover-content').html();
+        }
+});
 });
 </script>
 </html>
