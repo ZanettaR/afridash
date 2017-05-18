@@ -120,11 +120,11 @@ export class Header extends Component {
                           <div className="icon-bg bg-pink"></div>
                       </i><span className="menu-title">Grades</span></Link>
                       </li>
-                      <li id="yenagoapresent"><Link to="/classes"><i className="glyphicon-plus">
+                      <li id="yenagoapresent"><Link to="/roster"><i className="glyphicon-plus">
                           <div className="icon-bg bg-pink"></div>
                       </i><span className="menu-title">Class Roster</span></Link>
                       </li>
-                      <li id="perewarilendar"><Link to="/calander"><i className="fa fa-calendar fa-fw">
+                      <li id="perewarilendar"><Link to="/calendar"><i className="fa fa-calendar fa-fw">
                           <div className="icon-bg bg-grey"></div>
                       </i><span className="menu-title">My Calender</span></Link>
                       </li>

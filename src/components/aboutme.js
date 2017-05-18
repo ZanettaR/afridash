@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {browserHistory } from 'react-router-dom'
+import {browserHistory,Link } from 'react-router-dom'
 export class AboutMe extends Component {
   render() {
     return (
@@ -10,7 +10,7 @@ export class AboutMe extends Component {
                   Profile</div>
           </div>
           <ol className="breadcrumb page-breadcrumb pull-right">
-              <li><i className="fa fa-home"></i>&nbsp;<a href="index.php">Home</a>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+              <li><i className="fa fa-home"></i>&nbsp;<Link to="/">Home</Link>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
               <li className="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
               <li className="active">My Profile</li>
           </ol>

@@ -10,6 +10,10 @@ import {AboutMe} from './components/aboutme'
 import {Profile} from './components/profile'
 import {Header} from './components/header'
 import {Tasks} from './components/tasks'
+import {Advising} from './components/advising'
+import {Grades} from './components/grades'
+import {Roster} from './components/roster'
+import {Calendar} from './components/calendar'
 import {Registered_classes} from './components/registered_classes'
 
 import './index.css';
@@ -25,6 +29,10 @@ render((
       <Route path={"/aboutme"} component={AboutMe}/>
       <Route path={"/profile"} component={Profile}/>
       <Route path={'/tasks'} component={Tasks}/>
+      <Route path={'/advising'} component={Advising}/>
+      <Route path={'/grades'} component={Grades}/>
+      <Route path={'/roster'} component={Roster}/>
+      <Route path={'/calendar'} component={Calendar}/>
       <Route path={'/registered_classes'} component={Registered_classes}/>
       </Switch>
     </div>

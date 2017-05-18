@@ -67,6 +67,7 @@
     <script src="script/jquery.flot.spline.js"></script>
     <script src="script/zabuto_calendar.min.js"></script>
     <script src="script/index.js"></script>
+    <script src="script/todo.js"></script>
     <script type="text/javascript" src="script/jquery_notification_v.1.js"></script>
     <script src="script/scripts.js"></script>
     <!--CORE JAVASCRIPT-->
@@ -86,6 +87,24 @@
         ga('send', 'pageview');
 
 
+</script>
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#my-calendar").zabuto_calendar({
+            ajax: {
+          url: "show_data.php",
+          modal: true
+      },
+      cell_border: true,
+      today: true,
+      show_days: true,
+      weekstartson: 0,
+      nav_icon: {
+        prev: '<i class="fa fa-chevron-circle-left fa-lg"></i>',
+        next: '<i class="fa fa-chevron-circle-right fa-lg"></i>'
+      }
+        });
+    });
 </script>
 <script>
     //This is for the auto loading more posts
