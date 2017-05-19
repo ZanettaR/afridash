@@ -27,6 +27,7 @@ import {Transcript} from './components/transcript'
 import RGenerator from './components/generator'
 import {Resume} from './components/resume'
 import Evaluation from './components/evaluation'
+import {Grading} from './components/grading'
 import './index.css';
 render((
   //Render different routes
@@ -56,6 +57,7 @@ render((
       <Route path={'/generator'} component={RGenerator} />
       <Route path={'/resume'} component={Resume} />
       <Route path={'/evaluation'} component={Evaluation} />
+      <Route path={'/grading'} component={Grading} />
       <Route path={'/registration'} component={Registration}/>
       </Switch>
     </div>
