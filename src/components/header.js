@@ -53,7 +53,7 @@ export class Header extends Component {
   <div id="notificationTitle">Notifications</div>
   <div id="notificationsBody" className="notifications">
   </div>
-  <div id="notificationFooter"><Link to="notifications.php">See All</Link></div>
+  <div id="notificationFooter"><Link to="/notifications">See All</Link></div>
   </div>
   </li>
                       <li id="messages_link">
@@ -61,7 +61,7 @@ export class Header extends Component {
                           <div id="messagesContainer">
                               <div id="messagesTitle">Messages</div>
                               <div id="messagesBody" className="notifications"></div>
-                              <div id="messagesFooter"><a href="messages.php?id=<?php echo $user_id; ?>&user=<?php echo $c_id; ?>">See All</a></div>
+                              <div id="messagesFooter"><Link to="/messages">See All</Link></div>
                           </div>
                       </li>
                       <li id="tasks_li">
@@ -69,7 +69,7 @@ export class Header extends Component {
                           <div id="tasksContainer">
                               <div id="tasksTitle">Tasks</div>
                               <div id="tasksBody" className="notifications"></div>
-                              <div id="tasksFooter"><a href="tasks.php">See All</a></div>
+                              <div id="tasksFooter"><Link to="/tasks">See All</Link></div>
                           </div>
                       </li>
                       <li id="adakaprofile" className="dropdown topbar-user"><a data-hover="dropdown" href="#" className="dropdown-toggle">

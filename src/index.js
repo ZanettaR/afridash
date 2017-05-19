@@ -14,6 +14,10 @@ import {Advising} from './components/advising'
 import {Grades} from './components/grades'
 import {Roster} from './components/roster'
 import {Calendar} from './components/calendar'
+import {Friends} from './components/friends'
+import {Messages} from './components/messages'
+import {Notifications} from './components/notifications'
+
 import {Registered_classes} from './components/registered_classes'
 
 import './index.css';
@@ -34,6 +38,9 @@ render((
       <Route path={'/roster'} component={Roster}/>
       <Route path={'/calendar'} component={Calendar}/>
       <Route path={'/registered_classes'} component={Registered_classes}/>
+      <Route path={'/friends'} component={Friends}/>
+      <Route path={'/messages'} component={Messages}/>
+      <Route path={'/notifications'} component={Notifications}/>
       </Switch>
     </div>
 </BrowserRouter>),
