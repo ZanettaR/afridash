@@ -30,9 +30,9 @@ export class Advising extends Component {
                                  </div>
 
                             <div className="list-group">
-                         <Link to="/search_classes" className="list-group-item list-group-item-action">Search For classes</Link>
-                         <Link to="/registration" className="list-group-item list-group-item-action">Add classes</Link>
-                         <Link to="/class_registration" className="list-group-item list-group-item-action">Register/Drop classes</Link>
+                         <Link to="/search" className="list-group-item list-group-item-action">Search For classes</Link>
+                         <Link to="/add" className="list-group-item list-group-item-action">Add classes</Link>
+                         <Link to="/registration" className="list-group-item list-group-item-action">Register/Drop classes</Link>
                          <Link to="/registered_classes" className="list-group-item list-group-item-action">Class Schedule</Link>
                          </div>
                          </div>

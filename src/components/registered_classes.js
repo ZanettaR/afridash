@@ -10,7 +10,7 @@ export class Registered_classes extends Component {
                     Registered classes</div>
             </div>
             <ol className="breadcrumb page-breadcrumb pull-right">
-                <li><i className="fa fa-home"></i>&nbsp;<Link href="/">Home</Link>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                <li><i className="fa fa-home"></i>&nbsp;<Link to="/">Home</Link>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                 <li className="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i className="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                 <li className="active">Registered classes</li>
             </ol>
@@ -45,7 +45,7 @@ export class Registered_classes extends Component {
         </table>
         </div>
     </div>
-        <div className="container" style={{marginBottom:50,}} >
+        <div className="container" style={{marginBottom:50}} >
             <Link className="btn btn-danger" to="/advising">Close</Link>
         </div>
     </div>

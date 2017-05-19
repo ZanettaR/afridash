@@ -78,7 +78,7 @@ export class Header extends Component {
                               <li><Link to="/aboutme"><i className="fa fa-users"></i>My Profile</Link></li>
                               <li><Link to="/profile"><i className="fa fa-user"></i>My Wall</Link></li>
                               <li><Link to="/tasks"><i className="fa fa-tasks"></i>My Tasks</Link></li>
-                              <li><Link to="/registered_classes"><i className="fa fa-book"></i>My Classes</Link></li>
+                              <li><Link to="/registered"><i className="fa fa-book"></i>My Classes</Link></li>
                               <li className="divider"></li>
                               <li><Link to="/logout"><i className="fa fa-key"></i>Log Out</Link></li>
                           </ul>

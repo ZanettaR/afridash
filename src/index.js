@@ -14,6 +14,9 @@ import {Advising} from './components/advising'
 import {Grades} from './components/grades'
 import {Roster} from './components/roster'
 import {Calendar} from './components/calendar'
+import {Search} from './components/search'
+import {AddClass} from './components/addClass'
+import {Registration} from './components/registration'
 import {Registered_classes} from './components/registered_classes'
 
 import './index.css';
@@ -33,7 +36,10 @@ render((
       <Route path={'/grades'} component={Grades}/>
       <Route path={'/roster'} component={Roster}/>
       <Route path={'/calendar'} component={Calendar}/>
-      <Route path={'/registered_classes'} component={Registered_classes}/>
+      <Route path={'/registered'} component={Registered_classes}/>
+      <Route path={'/search'} component={Search}/>
+      <Route path={'/add'} component={AddClass}/>
+      <Route path={'/registration'} component={Registration}/>
       </Switch>
     </div>
 </BrowserRouter>),
