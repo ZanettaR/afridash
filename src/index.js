@@ -17,9 +17,16 @@ import {Calendar} from './components/calendar'
 import {Friends} from './components/friends'
 import {Messages} from './components/messages'
 import {Notifications} from './components/notifications'
-
 import {Registered_classes} from './components/registered_classes'
-
+import {Search} from './components/search'
+import {AddClass} from './components/addClass'
+import {Registration} from './components/registration'
+import {UserGrades} from './components/userGrades'
+import {TermGrades} from './components/termGrades'
+import {Transcript} from './components/transcript'
+import RGenerator from './components/generator'
+import {Resume} from './components/resume'
+import Evaluation from './components/evaluation'
 import './index.css';
 render((
   //Render different routes
@@ -37,10 +44,19 @@ render((
       <Route path={'/grades'} component={Grades}/>
       <Route path={'/roster'} component={Roster}/>
       <Route path={'/calendar'} component={Calendar}/>
-      <Route path={'/registered_classes'} component={Registered_classes}/>
+      <Route path={'/registered'} component={Registered_classes}/>
       <Route path={'/friends'} component={Friends}/>
       <Route path={'/messages'} component={Messages}/>
       <Route path={'/notifications'} component={Notifications}/>
+      <Route path={'/search'} component={Search}/>
+      <Route path={'/add'} component={AddClass}/>
+      <Route path={'/mygrades'} component={UserGrades}/>
+      <Route path={'/termgrades'} component={TermGrades}/>
+      <Route path={'/transcript'} component={Transcript}/>
+      <Route path={'/generator'} component={RGenerator} />
+      <Route path={'/resume'} component={Resume} />
+      <Route path={'/evaluation'} component={Evaluation} />
+      <Route path={'/registration'} component={Registration}/>
       </Switch>
     </div>
 </BrowserRouter>),

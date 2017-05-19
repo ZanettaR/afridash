@@ -30,10 +30,10 @@ export class Advising extends Component {
                                  </div>
 
                             <div className="list-group">
-                         <Link to="/search_classes" className="list-group-item list-group-item-action">Search For classes</Link>
-                         <Link to="/registration" className="list-group-item list-group-item-action">Add classes</Link>
-                         <Link to="/class_registration" className="list-group-item list-group-item-action">Register/Drop classes</Link>
-                         <Link to="/registered_classes" className="list-group-item list-group-item-action">Class Schedule</Link>
+                         <Link to="/search" className="list-group-item list-group-item-action">Search For classes</Link>
+                         <Link to="/add" className="list-group-item list-group-item-action">Add classes</Link>
+                         <Link to="/registration" className="list-group-item list-group-item-action">Register/Drop classes</Link>
+                         <Link to="/registered" className="list-group-item list-group-item-action">Class Schedule</Link>
                          </div>
                          </div>
                          </div>
@@ -44,10 +44,10 @@ export class Advising extends Component {
                          <p className="lead">Academic Module</p>
                          </div>
                          <div className="list-group">
-                         <Link to="/grade" className="list-group-item list-group-item-action">Grades</Link>
-                         <Link to="/term_grades" className="list-group-item list-group-item-action">Term GPA</Link>
+                         <Link to="/mygrades" className="list-group-item list-group-item-action">Grades</Link>
+                         <Link to="/termgrades" className="list-group-item list-group-item-action">Term GPA</Link>
                          <Link to="/transcript" className="list-group-item list-group-item-action">Transcript</Link>
-                         <Link to="/program_evaluation" className="list-group-item list-group-item-action">Program Evaluation</Link>
+                         <Link to="/evaluation" className="list-group-item list-group-item-action">Program Evaluation</Link>
 
                          </div>
                          </div>
@@ -59,7 +59,7 @@ export class Advising extends Component {
                                      <p className="lead">Virtual Intelligence</p>
                          </div>
                          <div className="list-group">
-                         <Link to="/resume_generator" className="list-group-item list-group-item-action">Resume Generator</Link>
+                         <Link to="/generator" className="list-group-item list-group-item-action">Resume Generator</Link>
                          <Link to="#" className="list-group-item list-group-item-action">Graduation Plan Generator</Link>
                          <Link to="#" className="list-group-item list-group-item-action">Virtual Mentor</Link>
                          </div>
@@ -73,7 +73,7 @@ export class Advising extends Component {
 
                          </div>
                          <div className="list-group">
-                         <Link to="/view_resume" className="list-group-item list-group-item-action">My Resume</Link>
+                         <Link to="/resume" className="list-group-item list-group-item-action">My Resume</Link>
                          <Link to="#" className="list-group-item list-group-item-action">My Transcript</Link>
                          <Link to="#" className="list-group-item list-group-item-action">My Cover Letter</Link>
                          </div>
