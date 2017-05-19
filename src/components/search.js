@@ -23,7 +23,7 @@ export class Search extends Component{
 <form role="form"  method="post">
 <div className="col-md-6">
 <div className="form-group">
-<label for="sel1">Subjects:</label>
+<label htmlFor="sel1">Subjects:</label>
 <select className="form-control" id="sel1" name="subject">
 <option></option>
    <option value="Biology">Biology</option>
@@ -35,7 +35,7 @@ export class Search extends Component{
 </div>
 <div className="col-md-6">
 <div className="form-group">
-<label for="sel1">Level:</label>
+<label htmlFor="sel1">Level:</label>
 <select className="form-control" id="sel2" name="level">
 <option></option>
 <option value="100">100</option>

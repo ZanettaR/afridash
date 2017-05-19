@@ -10,7 +10,7 @@ import {AboutMe} from './components/aboutme'
 import {Profile} from './components/profile'
 import {Header} from './components/header'
 import {Tasks} from './components/tasks'
-import {Advising} from './components/advising'
+import Advising from './components/advising'
 import {Grades} from './components/grades'
 import {Roster} from './components/roster'
 import {Calendar} from './components/calendar'
@@ -18,7 +18,11 @@ import {Search} from './components/search'
 import {AddClass} from './components/addClass'
 import {Registration} from './components/registration'
 import {Registered_classes} from './components/registered_classes'
-
+import {UserGrades} from './components/userGrades'
+import {TermGrades} from './components/termGrades'
+import {Transcript} from './components/transcript'
+import RGenerator from './components/generator'
+import {Resume} from './components/resume'
 import './index.css';
 render((
   //Render different routes
@@ -39,6 +43,11 @@ render((
       <Route path={'/registered'} component={Registered_classes}/>
       <Route path={'/search'} component={Search}/>
       <Route path={'/add'} component={AddClass}/>
+      <Route path={'/mygrades'} component={UserGrades}/>
+      <Route path={'/termgrades'} component={TermGrades}/>
+      <Route path={'/transcript'} component={Transcript}/>
+      <Route path={'/generator'} component={RGenerator} />
+      <Route path={'/resume'} component={Resume} />
       <Route path={'/registration'} component={Registration}/>
       </Switch>
     </div>

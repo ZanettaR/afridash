@@ -23,6 +23,7 @@ export class Registration extends Component{
           <div className="col-md-12 col-sm-12 col-lg-12 ">
             <div className="row">
               <input className="form-control" id="num_pre" type="hidden" value="1" />
+              <h1 className="text-center">Added Classes</h1>
               <form role="form" action="className_registration.php" method="post">
               <div className="panel-body">
                 <div className="dataTable_wrapper">
@@ -50,9 +51,6 @@ export class Registration extends Component{
             </table>
             </div>
             </div>
-      <div className="container">
-      <input type="submit" name="register" className="btn btn-primary" value="Submit"/>
-      </div>
       </form>
 <h1 className="text-center">Registered Classes</h1>
 <div className="panel-body">
@@ -80,9 +78,10 @@ export class Registration extends Component{
     </tbody>
     </table>
   </div>
-  <div className="container" style={{marginBottom:50}} >
-  <Link className="btn btn-danger" to="/advising">Close</Link>
-  </div>
+    <div className="container" style={{marginBottom:50}} >
+      <button type="button" name="register" className="btn btn-primary">Submit</button>&nbsp;
+      <Link className="btn btn-danger" to="/advising">Close</Link>
+    </div>
   </div>
 </div>
         </div>
