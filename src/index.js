@@ -17,6 +17,7 @@ import {Calendar} from './components/calendar'
 import {Friends} from './components/friends'
 import {Messages} from './components/messages'
 import {Notifications} from './components/notifications'
+import {Grading} from './components/grading'
 
 import {Registered_classes} from './components/registered_classes'
 
@@ -41,6 +42,7 @@ render((
       <Route path={'/friends'} component={Friends}/>
       <Route path={'/messages'} component={Messages}/>
       <Route path={'/notifications'} component={Notifications}/>
+        <Route path={'/grading'} component={Grading}/>
       </Switch>
     </div>
 </BrowserRouter>),
