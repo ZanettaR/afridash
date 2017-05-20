@@ -23,7 +23,7 @@ export class Home extends Component {
                   <div id="tab-general">
                     <div className="row mbl">
                         <div id="sum_box">
-                          <a href="courses.php?course=<?php echo $courses['course_title']?>&course_code=<?php echo $courses['course_code']?>">
+                          <Link to="/courses">
                             <div className="col-sm-6 col-md-2">
                               <div className="panel panel-blue db mbm">
                                 <div className="panel-body">
@@ -31,7 +31,7 @@ export class Home extends Component {
                                     Hello</p></h4>
                             </div>
                           </div>
-                        </div></a>
+                        </div></Link>
                       </div>
                     </div>
                     </div>
