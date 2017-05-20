@@ -28,6 +28,11 @@ import RGenerator from './components/generator'
 import {Resume} from './components/resume'
 import Evaluation from './components/evaluation'
 import {Grading} from './components/grading'
+import {TestGrades} from './components/testgrades'
+import {QuizGrades} from './components/quizgrades'
+import {MidGrades} from './components/midgrades'
+import {AssignmentGrades} from './components/assignmentgrades'
+import {FinalGrades} from './components/finalgrades'
 import './index.css';
 render((
   //Render different routes
@@ -58,7 +63,11 @@ render((
       <Route path={'/resume'} component={Resume} />
       <Route path={'/evaluation'} component={Evaluation} />
       <Route path={'/grading'} component={Grading} />
-      <Route path={'/registration'} component={Registration}/>
+      <Route path={'/test/grades'} component={TestGrades}/>
+      <Route path={'/quiz/grades'} component={QuizGrades}/>
+      <Route path={'/mid/grades'} component={MidGrades}/>
+      <Route path={'/assignment/grades'} component={AssignmentGrades}/>
+      <Route path={'/final/grades'} component={FinalGrades}/>
       </Switch>
     </div>
 </BrowserRouter>),
