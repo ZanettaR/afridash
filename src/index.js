@@ -29,6 +29,7 @@ import {Resume} from './components/resume'
 import Evaluation from './components/evaluation'
 import {Grading} from './components/grading'
 import {Attendance} from './components/attendance'
+import {Forums} from './components/forums'
 import './index.css';
 render((
   //Render different routes
@@ -61,6 +62,7 @@ render((
       <Route path={'/grading'} component={Grading} />
       <Route path={'/attendance'} component={Attendance} />
       <Route path={'/registration'} component={Registration}/>
+      <Route path={'/forums'} component={Forums}/>
       </Switch>
     </div>
 </BrowserRouter>),
