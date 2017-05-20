@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from "react-dom"; //Render method
 
-import { BrowserRouter, Route, browserHistory,Switch,Router } from 'react-router-dom' //Naviation functions
+import { BrowserRouter, Route, hashHistory,Switch,Router } from 'react-router-dom' //Naviation functions
 //Import our route options
 import App from './App'
 import {Home} from './components/home'
@@ -28,16 +28,17 @@ import RGenerator from './components/generator'
 import {Resume} from './components/resume'
 import Evaluation from './components/evaluation'
 import {Grading} from './components/grading'
+import {Attendance} from './components/attendance'
 import './index.css';
 render((
   //Render different routes
-  <BrowserRouter history ={browserHistory} >
+  <BrowserRouter history ={hashHistory} >
     <div>
       <Header />
       <Route path={"/login"} component={Login}></Route>
       <Switch>
       <Route exact path={"/"} component={App} />
-      <Route path={'/home'} component={Home} />
+      <Route exact path={'/home'} component={Home} />
       <Route path={"/aboutme"} component={AboutMe}/>
       <Route path={"/profile"} component={Profile}/>
       <Route path={'/tasks'} component={Tasks}/>
@@ -58,6 +59,7 @@ render((
       <Route path={'/resume'} component={Resume} />
       <Route path={'/evaluation'} component={Evaluation} />
       <Route path={'/grading'} component={Grading} />
+      <Route path={'/attendance'} component={Attendance} />
       <Route path={'/registration'} component={Registration}/>
       </Switch>
     </div>

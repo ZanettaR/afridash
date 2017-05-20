@@ -2,6 +2,16 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {ToDo} from './todo'
 export class Calendar extends Component {
+  componentDidMount () {
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.src   = "/script/zabuto_calendar.min.js";    // use this for linked script
+    document.body.appendChild(script);
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.src   = "/script/mine.js";    // use this for linked script
+    document.body.appendChild(s);
+  }
   render(){
     return (
       <div id="page-wrapper">
