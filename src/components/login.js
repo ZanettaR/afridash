@@ -26,7 +26,7 @@ export class Login extends Component {
   }
   render() {
     return (
-      this.state.redirect ? <Redirect to="/home" push /> : <div className="wrapper">
+      this.state.redirect ? <Redirect to="/forgotPassword" push /> : <div className="wrapper">
         <div className="container">
           <h1><strong>WELCOME TO</strong></h1>
           <img width="200px" src={logo} alt=""/>
@@ -38,7 +38,7 @@ export class Login extends Component {
               <input type="password" required name="password" placeholder="Password" />
             </div>
             <button id="login-button" type="submit" name="submit">Login</button>
-            <div><p className="password" ><Link to="/home">Forgot Password</Link></p>
+            <div><p className="password" ><Link to="/reset">Forgot Password</Link></p>
           </div>
           <div><p className="password" ><Link to="/home">New User</Link></p></div>
           <br/>

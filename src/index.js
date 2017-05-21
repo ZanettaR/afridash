@@ -5,6 +5,7 @@ import { BrowserRouter, Route, browserHistory } from 'react-router-dom' //Naviat
 import App from './App'
 import {Home} from './components/home'
 import {Login} from './components/login'
+import {Forgot} from './components/forgotPassword'
 import './index.css';
 render((
   //Render different routes
@@ -13,6 +14,7 @@ render((
       <Route exact path={"/"} component={App} />
       <Route path={"/login"} component={Login}></Route>
       <Route path={"/home"} component={Home} />
+      <Route path={"/reset"} component={Forgot} />
     </div>
 </BrowserRouter>),
   document.getElementById('root')
