@@ -5,13 +5,16 @@ import { BrowserRouter, Route, browserHistory } from 'react-router-dom' //Naviat
 import App from './App'
 import {Home} from './components/home'
 import {Login} from './components/login'
+import {Registration} from './components/registration'
+import {Test} from './components/test'
 import './index.css';
 render((
   //Render different routes
-  <BrowserRouter history ={browserHistory} >
+  <BrowserRouter history={browserHistory} >
     <div>
       <Route exact path={"/"} component={App} />
       <Route path={"/login"} component={Login}></Route>
+      <Route path={"/signup"} component={Registration} />
       <Route path={"/home"} component={Home} />
     </div>
 </BrowserRouter>),

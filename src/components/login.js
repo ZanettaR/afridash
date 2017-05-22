@@ -40,7 +40,7 @@ export class Login extends Component {
             <button id="login-button" type="submit" name="submit">Login</button>
             <div><p className="password" ><Link to="/home">Forgot Password</Link></p>
           </div>
-          <div><p className="password" ><Link to="/home">New User</Link></p></div>
+          <div><p className="password" ><Link to="/registration">New User</Link></p></div>
           <br/>
           <br/>
           <p className="ptext">If this is your first time visiting, click on New User!</p>
