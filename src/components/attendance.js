@@ -37,6 +37,7 @@ export class Attendance extends Component {
 <button className="btn btn-default"><i className="fa fa-check-square"> Mark Remaining Absent</i></button>
 <br />
 <form role="form" method="post" action="">
+  <div className="col-sm-12">
 <div className="dataTable_wrapper">
 <table className="table table-striped table-bordered table-hover " id="dataTables-example">
     <thead>
@@ -70,6 +71,7 @@ export class Attendance extends Component {
         <input type="submit" name="register" value="Save Attendance" style={{width:150}} className="btn btn-default" />
       </div>
     </div>
+</div>
 </div>
 </form>
 </div>

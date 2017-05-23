@@ -35,14 +35,35 @@ import {QuizGrades} from './components/quizgrades'
 import {MidGrades} from './components/midgrades'
 import {AssignmentGrades} from './components/assignmentgrades'
 import {FinalGrades} from './components/finalgrades'
+import {Courses} from './components/courses'
+import {AddAssignment} from './components/addassignment'
+import {StartAssignment} from './components/startassignment'
+import {ViewAssignment} from './components/viewassignment'
+import {AddQuiz} from './components/addquiz'
+import {StartQuiz} from './components/startquiz'
+import {ViewQuiz} from './components/viewquiz'
+import {AddTest} from './components/addtest'
+import {StartTest} from './components/starttest'
+import {ViewTest} from './components/viewtest'
+import {AddMid} from './components/addmid'
+import {StartMid} from './components/startmid'
+import {ViewMid} from './components/viewmid'
+import {AddFinals} from './components/addfinals'
+import {StartFinals} from './components/startfinals'
+import {ViewFinals} from './components/viewfinals'
+import {Forgot} from './components/forgotPassword'
+import SignUp from './components/signup'
 import './index.css';
 render((
   //Render different routes
   <BrowserRouter history ={hashHistory} >
     <div>
       <Header />
-      <Route path={"/login"} component={Login}></Route>
+
       <Switch>
+      <Route path={"/reset"} component={Forgot} />
+      <Route path={"/login"} component={Login}></Route>
+      <Route path={"/signup"} component={SignUp} />
       <Route exact path={"/"} component={App} />
       <Route exact path={'/home'} component={Home} />
       <Route path={"/aboutme"} component={AboutMe}/>
@@ -73,6 +94,22 @@ render((
       <Route path={'/mid/grades'} component={MidGrades}/>
       <Route path={'/assignment/grades'} component={AssignmentGrades}/>
       <Route path={'/final/grades'} component={FinalGrades}/>
+      <Route path={'/courses'} component={Courses}/>
+      <Route path={'/assignment/add'} component={AddAssignment}/>
+      <Route path={'/assignment/start'} component={StartAssignment}/>
+      <Route path={'/assignment/view'} component={ViewAssignment}/>
+      <Route path={'/quiz/add'} component={AddQuiz}/>
+      <Route path={'/quiz/start'} component={StartQuiz}/>
+      <Route path={'/quiz/view'} component={ViewQuiz}/>
+      <Route path={'/test/add'} component={AddTest}/>
+      <Route path={'/test/start'} component={StartTest}/>
+      <Route path={'/test/view'} component={ViewTest}/>
+      <Route path={'/mid/add'} component={AddMid}/>
+      <Route path={'/mid/start'} component={StartMid}/>
+      <Route path={'/mid/view'} component={ViewMid}/>
+      <Route path={'/finals/add'} component={AddFinals}/>
+      <Route path={'/finals/start'} component={StartFinals}/>
+      <Route path={'/finals/view'} component={ViewFinals}/>
       </Switch>
     </div>
 </BrowserRouter>),

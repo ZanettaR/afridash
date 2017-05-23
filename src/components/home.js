@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {browserHistory, Link } from 'react-router-dom'
 import {ToDo} from './todo'
+const firebase = require('firebase')
+import {Firebase} from '../jsHelpers/firebase'
 export class Home extends Component {
   render() {
     return (
