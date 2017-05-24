@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {BrowserHistory} from 'react-router-dom'
 import { Link,Redirect } from 'react-router-dom'
-
+const firebase = require('firebase')
+import {Firebase} from '../jsHelpers/firebase'
 import logo from './images/logo.png'
 import './css/style.css'
 import './css/font-awesome.min.css'
@@ -20,6 +21,162 @@ import './css/hopscotch.min.css'
 import './css/mikes-modal.css'
 import './css/emojionearea.min.css'
 export class Header extends Component {
+  componentDidMount () {
+    /*
+    <script src="script/html5shiv.js"></script>
+    <script src="script/jquery.cookie.js"></script>
+    <script src="script/icheck.min.js"></script>
+    <script src="script/jquery.news-ticker.js"></script>
+    <script src="script/jquery.flot.js"></script>
+    <script src="script/jquery.flot.categories.js"></script>
+    <script src="script/jquery.flot.pie.js"></script>
+    <script src="script/jquery.flot.tooltip.js"></script>
+    <script src="script/jquery.flot.resize.js"></script>
+    <script src="script/jquery.flot.fillbetween.js"></script>
+    <script src="script/jquery.flot.stack.js"></script>
+    */
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/jquery.form.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/jquery-migrate-1.2.1.min.js";    // use this for linked script
+    document.body.appendChild(s);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/main.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/jquery-ui.js";    // use this for linked script
+    document.body.appendChild(s);
+    //New section
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/jquery.flot.spline.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/bootstrap.min.js";    // use this for linked script
+    document.body.appendChild(s);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/bootstrap-hover-dropdown.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/jquery.menu.js";    // use this for linked script
+    document.body.appendChild(s);
+
+    //New
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/jquery.metisMenu.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/custom.min.js";    // use this for linked script
+    document.body.appendChild(s);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/respond.min.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/jquery.slimscroll.js";    // use this for linked script
+    document.body.appendChild(s);
+    //New section
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/jquery.menu.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/responsive-tabs.js";    // use this for linked script
+    document.body.appendChild(s);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/pace.min.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.setAttribute('id', 'addedScript');
+    s.src   = "/script/holder.js";    // use this for linked script
+    document.body.appendChild(s);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/index.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.src   = "/script/jquery_notification_v.1.js";    // use this for linked script
+    document.body.appendChild(s);
+  }
+  render() {
+    return (
+      <div>
+       <HeaderContent />
+       {this.props.children}
+     </div>
+    )
+  }
+}
+ class HeaderContent extends Component {
+   constructor (props){
+     super(props)
+     this.state = {
+       loggedIn:true,
+       username:'',
+       profilePicture:'none',
+     }
+     //Gives access to currentUser
+     firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
+   }
+   handleUser (user) {
+      if (user) {
+        this.setState({username:user.displayName, profilePicture:user.photoURL})
+      }
+   }
+   logOUT() {
+   firebase.auth().signOut().then(function() {
+   // Sign-out successful.
+ }).catch(function(error) {
+   // An error happened.
+ });
+ this.setState({loggedIn:false})
+   }
   render(){
     return (
       <div>
@@ -73,14 +230,14 @@ export class Header extends Component {
                           </div>
                       </li>
                       <li id="adakaprofile" className="dropdown topbar-user"><a data-hover="dropdown" href="#" className="dropdown-toggle">
-                          <span className="caret"></span></a>
+                          <img src={this.state.profilePicture} style={{width:25,height:25, borderRadius:12.5}} /><span class="hidden-xs">{this.state.username}</span>&nbsp;<span className="caret"></span></a>
                           <ul className="dropdown-menu dropdown-user pull-right">
                               <li><Link to="/aboutme"><i className="fa fa-users"></i>My Profile</Link></li>
                               <li><Link to="/profile"><i className="fa fa-user"></i>My Wall</Link></li>
                               <li><Link to="/tasks"><i className="fa fa-tasks"></i>My Tasks</Link></li>
                               <li><Link to="/registered_classes"><i className="fa fa-book"></i>My Classes</Link></li>
                               <li className="divider"></li>
-                              <li><Link to="/logout"><i className="fa fa-key"></i>Log Out</Link></li>
+                              <li ><a type="button" href="" onClick={()=>this.logOUT()}><i className="fa fa-key"></i>Log Out</a></li>
                           </ul>
                       </li>
 

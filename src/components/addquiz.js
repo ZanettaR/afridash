@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {Link, browserHistory } from 'react-router-dom'
+import Auth from '../jsHelpers/auth'
 export class AddQuiz extends Component {
   render() {
     return (
                  <div id="page-wrapper">
+                   <Auth />
                      <div id="title-breadcrumb-option-demo" className="page-title-breadcrumb">
                          <div className="page-header pull-left">
                              <div class="page-title">

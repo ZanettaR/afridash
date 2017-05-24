@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import './css/BeatPicker.min.css'
 import './css/prism.css'
+import Auth from '../jsHelpers/auth'
 export class Attendance extends Component {
   componentDidMount() {
     var script   = document.createElement("script");
@@ -17,6 +18,7 @@ export class Attendance extends Component {
 
     return (
       <div id="page-wrapper" >
+        <Auth />
     <div id="title-breadcrumb-option-demo" className="page-title-breadcrumb">
         <div className="page-header pull-left">
             <div className="page-title">

@@ -1,9 +1,17 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import Auth from '../jsHelpers/auth'
 export class Resume extends Component {
+  componentWillMount () {
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.src   = "/script/resume.js";    // use this for linked script
+    document.body.appendChild(s);
+  }
   render(){
     return (
       <div id="page-wrapper">
+        <Auth />
          <div id="title-breadcrumb-option-demo" className="page-title-breadcrumb">
              <div className="page-header pull-left">
                  <div className="page-title">

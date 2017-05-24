@@ -1,6 +1,12 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 export class ToDo extends Component {
+  componentWillMount () {
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.src   = "/script/todo.js";    // use this for linked script
+    document.body.appendChild(s);
+  }
   render() {
     return (
       <div>

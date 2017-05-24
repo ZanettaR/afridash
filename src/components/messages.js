@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {Link, browserHistory } from 'react-router-dom'
+import Auth from '../jsHelpers/auth'
 export class Messages extends Component {
   render() {
     return (
       <div id="page-wrapper" onload="prettyPrint()">
+        <Auth />
       <div className="content container-fluid bootstrap snippets">
             <div className="row row-broken">
               <div className="col-sm-3 col-md-4 col-xs-12">

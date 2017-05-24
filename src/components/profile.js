@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import {Link } from 'react-router-dom'
 import logo from './images/logo.png'
 import './css/timeline.css'
+import Auth from '../jsHelpers/auth'
 export class Profile extends Component {
   render() {
     return (
       <div id="page-wrapper">
+        <Auth />
          <div id="title-breadcrumb-option-demo" className="page-title-breadcrumb">
              <div className="page-header pull-left">
                  <div className="page-title">

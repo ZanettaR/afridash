@@ -56,14 +56,14 @@ import SignUp from './components/signup'
 import './index.css';
 render((
   //Render different routes
+
   <BrowserRouter history ={hashHistory} >
     <div>
-      <Header />
-
       <Switch>
       <Route path={"/reset"} component={Forgot} />
       <Route path={"/login"} component={Login}></Route>
       <Route path={"/signup"} component={SignUp} />
+      <Header >
       <Route exact path={"/"} component={App} />
       <Route exact path={'/home'} component={Home} />
       <Route path={"/aboutme"} component={AboutMe}/>
@@ -110,6 +110,7 @@ render((
       <Route path={'/finals/add'} component={AddFinals}/>
       <Route path={'/finals/start'} component={StartFinals}/>
       <Route path={'/finals/view'} component={ViewFinals}/>
+    </Header>
       </Switch>
     </div>
 </BrowserRouter>),

@@ -1,12 +1,26 @@
 import React, {Component} from 'react'
-import {browserHistory, Link } from 'react-router-dom'
+import {browserHistory, Link,Redirect } from 'react-router-dom'
 import {ToDo} from './todo'
 const firebase = require('firebase')
 import {Firebase} from '../jsHelpers/firebase'
+import Auth from '../jsHelpers/auth'
 export class Home extends Component {
+  constructor(props){
+    super(props)
+    this.auth = firebase.auth()
+    this.user = firebase.auth().currentUser
+    this.state = {
+      name:'Richard',
+      loggedIn:true,
+    }
+  }
+  async componentDidMount () {
+
+  }
   render() {
     return (
-      <div id="page-wrapper">
+       <div id="page-wrapper">
+         <Auth />
                 <div id="title-breadcrumb-option-demo" className="page-title-breadcrumb">
                     <div className="page-header pull-left">
                         <div className="page-title">
@@ -73,6 +87,7 @@ export class Home extends Component {
                     <div className="panel" id="update_panelBox<?php echo $msgID ?>">
                     <div className="panel-heading">
                         <input type="hidden" name="id" id="id" />
+                        <button type="button" className="btn btn-danger" onClick={()=>this.logOUT()}>Log OUT</button>
                         <div className="caption">Picture
                           <a href='#'>Richard Igbiriki</a> made a status update ";
                           <div id="1" className="panel-body post_box">
