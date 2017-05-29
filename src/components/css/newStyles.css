@@ -1,4 +1,4 @@
-@media only screen and (max-width : 540px) 
+@media only screen and (max-width : 540px)
 {
 .chat-sidebar
 {
@@ -28,7 +28,7 @@ padding-bottom: 10px;
 border: 1px solid rgba(29, 49, 91, .3);
 }
 
-.sidebar-name 
+.sidebar-name
 {
 padding-left: 10px;
 padding-right: 10px;
@@ -62,7 +62,7 @@ vertical-align:middle;
 }
 
 
-        
+
 .popup-box
 {
 display: none;
@@ -108,8 +108,8 @@ color: inherit;
 height: 100%;
 overflow-y: scroll;
 }
-            
-        
+
+
 #notification_li{position:relative}
 #notificationContainer {
 background-color: #fff;
@@ -388,7 +388,7 @@ color:#3b5998;
 
 .display_pan
 {
-border-bottom:solid 1px #dedede; font-size:12px; 
+border-bottom:solid 1px #dedede; font-size:12px;
 height:75px;
 background: #fff;
 color:#3b5998;
@@ -413,7 +413,7 @@ background-color:#00CCFF;
 	position:fixed;
 	right:0px;
 	bottom: 0px;
-    
+
 	width:200px;
 }
 .chat_body{
@@ -458,7 +458,7 @@ background-color:#00CCFF;
 	border-top:1px solid #DDDDDD;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;  
+	box-sizing: border-box;
 }
 
 .close{
@@ -469,7 +469,7 @@ background-color:#00CCFF;
 	float:right;
 	cursor:pointer;
 	padding-right:5px;
-	
+
 }
 
 .user{
@@ -524,7 +524,7 @@ background-color:#00CCFF;
 	border-color: transparent transparent transparent #EEF2E7;
 	right:-20px;
 	top:7px;
-} 
+}
 .reply{
     padding: 5px 40px;
     font-weight: bold;
@@ -585,7 +585,7 @@ background-color:#00CCFF;
 }
 /* USER PROFILE PAGE */
   .card {
-	
+
     margin-top: 20px;
   /*
     height: 10%!important;
@@ -618,17 +618,17 @@ background-color:#00CCFF;
 	height: 300px!important;
     width:100%!important;
 	overflow:hidden;
-	
+
 }
 .card-background img {
-	
+
 	height: 100%!important;
     width:100%!important;
 	overflow:hidden;
 	/*
 	max-height: 30%!important;
     max-width:100%!important;
-	
+
     -webkit-filter: blur(25px);
     -moz-filter: blur(25px);
     -o-filter: blur(25px);
@@ -697,7 +697,7 @@ background-color:#00CCFF;
 }
 .aprofile{
     text-decoration: none;
-    color:blue;  
+    color:blue;
 }
     #popover-link{
         text-align: center;
@@ -748,4 +748,22 @@ background-color:#00CCFF;
 .demarcation {
     border-right: 1px solid;
 }
-
+.addButton {
+  position: fixed;
+  z-index: 1000;
+  bottom:5%;
+  right:3%;
+}
+.addPostArea {
+  background: #3e77ab; /* Old browsers */
+	background: -moz-linear-gradient(top, #3e77ab 0%, #54a3ee 50%, #54a3ee 51%, #3896ed 51%, #4783ba 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3e77ab), color-stop(50%,#54a3ee), color-stop(51%,#54a3ee), color-stop(51%,#3896ed), color-stop(100%,#4783ba)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #3e77ab 0%,#54a3ee 50%,#54a3ee 51%,#3896ed 51%,#4783ba 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #3e77ab 0%,#54a3ee 50%,#54a3ee 51%,#3896ed 51%,#4783ba 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #3e77ab 0%,#54a3ee 50%,#54a3ee 51%,#3896ed 51%,#4783ba 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #3e77ab 0%,#54a3ee 50%,#54a3ee 51%,#3896ed 51%,#4783ba 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e77ab', endColorstr='#4783ba',GradientType=0 ); /* IE6-9 */
+  transition: 0.2s all ease-in-out;
+  outline: none;
+  color:#FFF;
+}

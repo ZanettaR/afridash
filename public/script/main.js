@@ -130,13 +130,13 @@ $(function () {
     $('.btn-chat').click(function () {
         if($('#chat-box').is(':visible')){
             $('#chat-form').toggle('slide', {
-                direction: 'down' 
+                direction: 'right'
             }, 400);
             $('#chat-box').hide();
         } else{
             $('#chat-form').toggle('slide', {
-                direction: 'down' 
-            }, 1400);
+                direction: 'right'
+            }, 400);
         }
     });
     $('.chat-box-close').click(function(){
@@ -145,7 +145,7 @@ $(function () {
     });
     $('.chat-form-close').click(function(){
         $('#chat-form').toggle('slide', {
-            direction: 'down' 
+            direction: 'right'
         }, 400);
         $('#chat-box').hide();
     });
@@ -155,7 +155,7 @@ $(function () {
         $('#chat-form .chat-group a').removeClass('active');
         $(this).addClass('active');
         strUserName = $('> small', this).text();
-       
+
         $('.display-name', '#chat-box').html(strUserName);
         user_id = $(this).find('span#id').attr('id');
         var userStatus = $(this).find('span.user-status').attr('class');
@@ -186,12 +186,67 @@ $(function () {
 
         if(!$('#chat-box').is(':visible')){
             $('#chat-box').toggle('slide',{
-                direction: 'right' 
+                direction: 'right'
             }, 500);
         }
         // FOCUS INPUT TExT WHEN CLICK
         $('ul.chat-box-body').scrollTop(500);
         $("#chat-box .chat-textarea input").focus();
+    });
+        // Add content to form
+    $('.chat-textarea input').on("keypress", function(e){
+
+        var $obj = $(this);
+        var $me = $obj.parent().parent().find('ul.chat-box-body');
+        var $my_avt = 'https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg';
+        var $your_avt = 'https://s3.amazonaws.com/uifaces/faces/twitter/alagoon/48.jpg';
+        if (e.which == 13) {
+            var $content = $obj.val();
+
+            if ($content !== "") {
+                var d = new Date();
+                var h = d.getHours();
+                var m = d.getMinutes();
+                if (m < 10) m = "0" + m;
+                $obj.val(""); // CLEAR TEXT ON TEXTAREA
+
+                var $element = ""; 
+                $element += "<li>";
+                $element += "<p>";
+                $element += "<img class='avt' src='"+$my_avt+"'>";
+                $element += "<span class='user'>John Doe</span>";
+                $element += "<span class='time'>" + h + ":" + m + "</span>";
+                $element += "</p>";
+                $element = $element + "<p>" + $content +  "</p>";
+                $element += "</li>";
+                
+                $me.append($element);
+                var height = 0;
+                $me.find('li').each(function(i, value){
+                    height += parseInt($(this).height());
+                });
+
+                height += '';
+                //alert(height);
+                $me.scrollTop(height);  // add more 400px for #chat-box position      
+
+                // RANDOM RESPOND CHAT
+
+                var $res = "";
+                $res += "<li class='odd'>";
+                $res += "<p>";
+                $res += "<img class='avt' src='"+$your_avt+"'>";
+                $res += "<span class='user'>Swlabs</span>";
+                $res += "<span class='time'>" + h + ":" + m + "</span>";
+                $res += "</p>";
+                $res = $res + "<p>" + "Yep! It's so funny :)" + "</p>";
+                $res += "</li>";
+                setTimeout(function(){
+                    $me.append($res);
+                    $me.scrollTop(height+100); // add more 500px for #chat-box position             
+                }, 1000);
+            }
+        }
     });
 
     // END FORM CHAT
@@ -281,108 +336,105 @@ $(function () {
     });
     // CALL FUNCTION RESPONSIVE TABS
     fakewaffle.responsiveTabs(['xs', 'sm']);
-    
-    $('.edit_my_post').click(function() { 
-    var $this = $(this); 
-    var oldText = $this.parent().parent().parent().find('p').text(); 
-    var id = $this.parent().parent().find('#id').val(); 
-    console.log('id: ' + id); 
-    $this.parent().parent().parent().find('p').empty().append('<textarea class="my_Description" cols="33">' + oldText + '</textarea>'); 
-    $('.my_Description').blur(function() { 
-        var newText = $(this).val(); 
-        $.ajax({ 
-            type: 'POST', 
-            url: 'update_post.php', 
-            data: 'description=' + newText + '&id=' + id, 
-            success: function(results) { 
-                $this.parent().parent().parent().find('p').empty().append(newText); 
-            } 
-        }); 
-    }); 
-    return false; 
-}); 
-    
-    $('.edit_about1').click(function() { 
-    var $this = $(this); 
-    var oldText = $this.parent().find('p').text(); 
-    var id = $this.parent().find('#id').val(); 
-    console.log('id: ' + id); 
-    $this.parent().find('p').empty().append('<textarea class="my_Des" cols="33">' + oldText + '</textarea>'); 
-    $('.my_Des').blur(function() { 
-        var newText = $(this).val(); 
-        $.ajax({ 
-            type: 'POST', 
-            url: 'update_p1.php', 
-            data: 'description=' + newText + '&id=' + id, 
-            success: function(results) { 
-                $this.parent().find('p').empty().append(newText); 
-            } 
-        }); 
-    }); 
-    return false; 
-}); 
-    
-    $('.edit_about2').click(function() { 
-    var $this = $(this); 
-    var oldText = $this.parent().find('p').text(); 
-    var id = $this.parent().find('#id').val(); 
-    console.log('id: ' + id); 
-    $this.parent().find('p').empty().append('<textarea class="my_Description" cols="33">' + oldText + '</textarea>'); 
-    $('.my_Description').blur(function() { 
-        var newText = $(this).val(); 
-        $.ajax({ 
-            type: 'POST', 
-            url: 'update_p2.php', 
-            data: 'description=' + newText + '&id=' + id, 
-            success: function(results) { 
-                $this.parent().find('p').empty().append(newText); 
-            } 
-        }); 
-    }); 
-    return false; 
-}); 
-    
-    $('.edit_about3').click(function() { 
-    var $this = $(this); 
-    var oldText = $this.parent().find('p').text(); 
-    var id = $this.parent().find('#id').val(); 
-    console.log('id: ' + id); 
-    $this.parent().find('p').empty().append('<textarea class="my_Description" cols="33">' + oldText + '</textarea>'); 
-    $('.my_Description').blur(function() { 
-        var newText = $(this).val(); 
-        $.ajax({ 
-            type: 'POST', 
-            url: 'update_p3.php', 
-            data: 'description=' + newText + '&id=' + id, 
-            success: function(results) { 
-                $this.parent().find('p').empty().append(newText); 
-            } 
-        }); 
-    }); 
-    return false; 
-}); 
-    
-    $('.edit_about4').click(function() { 
-    var $this = $(this); 
-    var oldText = $this.find('p').text(); 
-    var id = $this.parent().find('#id').val(); 
-    console.log('id: ' + id); 
-    $this.find('p').empty().append('<textarea class="my_" cols="33">' + oldText + '</textarea>'); 
-    $('.my_').blur(function() { 
-        var newText = $(this).val(); 
-        $.ajax({ 
-            type: 'POST', 
-            url: 'update_p4.php', 
-            data: 'description=' + newText + '&id=' + id, 
-            success: function(results) { 
-                $this.find('p').empty().append(newText); 
-            } 
-        }); 
-    }); 
-    return false; 
-}); 
-    
+
+    $('.edit_my_post').click(function() {
+    var $this = $(this);
+    var oldText = $this.parent().parent().parent().find('p').text();
+    var id = $this.parent().parent().find('#id').val();
+    console.log('id: ' + id);
+    $this.parent().parent().parent().find('p').empty().append('<textarea class="my_Description" cols="33">' + oldText + '</textarea>');
+    $('.my_Description').blur(function() {
+        var newText = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: 'update_post.php',
+            data: 'description=' + newText + '&id=' + id,
+            success: function(results) {
+                $this.parent().parent().parent().find('p').empty().append(newText);
+            }
+        });
+    });
+    return false;
 });
 
+    $('.edit_about1').click(function() {
+    var $this = $(this);
+    var oldText = $this.parent().find('p').text();
+    var id = $this.parent().find('#id').val();
+    console.log('id: ' + id);
+    $this.parent().find('p').empty().append('<textarea class="my_Des" cols="33">' + oldText + '</textarea>');
+    $('.my_Des').blur(function() {
+        var newText = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: 'update_p1.php',
+            data: 'description=' + newText + '&id=' + id,
+            success: function(results) {
+                $this.parent().find('p').empty().append(newText);
+            }
+        });
+    });
+    return false;
+});
 
+    $('.edit_about2').click(function() {
+    var $this = $(this);
+    var oldText = $this.parent().find('p').text();
+    var id = $this.parent().find('#id').val();
+    console.log('id: ' + id);
+    $this.parent().find('p').empty().append('<textarea class="my_Description" cols="33">' + oldText + '</textarea>');
+    $('.my_Description').blur(function() {
+        var newText = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: 'update_p2.php',
+            data: 'description=' + newText + '&id=' + id,
+            success: function(results) {
+                $this.parent().find('p').empty().append(newText);
+            }
+        });
+    });
+    return false;
+});
 
+    $('.edit_about3').click(function() {
+    var $this = $(this);
+    var oldText = $this.parent().find('p').text();
+    var id = $this.parent().find('#id').val();
+    console.log('id: ' + id);
+    $this.parent().find('p').empty().append('<textarea class="my_Description" cols="33">' + oldText + '</textarea>');
+    $('.my_Description').blur(function() {
+        var newText = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: 'update_p3.php',
+            data: 'description=' + newText + '&id=' + id,
+            success: function(results) {
+                $this.parent().find('p').empty().append(newText);
+            }
+        });
+    });
+    return false;
+});
+
+    $('.edit_about4').click(function() {
+    var $this = $(this);
+    var oldText = $this.find('p').text();
+    var id = $this.parent().find('#id').val();
+    console.log('id: ' + id);
+    $this.find('p').empty().append('<textarea class="my_" cols="33">' + oldText + '</textarea>');
+    $('.my_').blur(function() {
+        var newText = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: 'update_p4.php',
+            data: 'description=' + newText + '&id=' + id,
+            success: function(results) {
+                $this.find('p').empty().append(newText);
+            }
+        });
+    });
+    return false;
+});
+
+});

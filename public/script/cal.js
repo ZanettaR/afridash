@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#my-calendar").zabuto_calendar({
+$("#my-calendar").zabuto_calendar({
         ajax: {
       url: "show_data.php",
       modal: true

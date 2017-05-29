@@ -2,6 +2,12 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Auth from '../jsHelpers/auth'
 export  default class Generator extends Component {
+  componentWillMount () {
+    var s   = document.createElement("script");
+    s.type  = "text/javascript";
+    s.src   = "/script/resume.js";    // use this for linked script
+    document.body.appendChild(s);
+  }
   render() {
     return (
       <div id="page-wrapper">

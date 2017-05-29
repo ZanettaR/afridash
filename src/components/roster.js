@@ -22,7 +22,7 @@ export class Roster extends Component {
     <div className="page-content">
         <div className="row">
           <ul className="list-group">
-             <li className="list-group-item"><Link to="/attendance">Course Title</Link></li>
+             <li className="list-group-item"><Link to="/roster/12">Course Title</Link></li>
         </ul>
         </div>
       </div>

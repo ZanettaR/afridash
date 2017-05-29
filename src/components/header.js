@@ -23,11 +23,6 @@ import './css/emojionearea.min.css'
 export class Header extends Component {
   componentDidMount () {
     /*
-    <script src="script/html5shiv.js"></script>
-    <script src="script/jquery.cookie.js"></script>
-    <script src="script/icheck.min.js"></script>
-    <script src="script/jquery.news-ticker.js"></script>
-    <script src="script/jquery.flot.js"></script>
     <script src="script/jquery.flot.categories.js"></script>
     <script src="script/jquery.flot.pie.js"></script>
     <script src="script/jquery.flot.tooltip.js"></script>
@@ -35,6 +30,36 @@ export class Header extends Component {
     <script src="script/jquery.flot.fillbetween.js"></script>
     <script src="script/jquery.flot.stack.js"></script>
     */
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/jquery.flot.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/jquery.news-ticker.js";    // use this for linked script
+    document.body.appendChild(script);
+
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/icheck.min.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/jquery.cookie.js";    // use this for linked script
+    document.body.appendChild(script);
+
+    var script   = document.createElement("script");
+    script.type  = "text/javascript";
+    script.setAttribute('id', 'addedScript');
+    script.src   = "/script/html5shiv.js";    // use this for linked script
+    document.body.appendChild(script);
 
     var script   = document.createElement("script");
     script.type  = "text/javascript";
@@ -194,61 +219,238 @@ export class Header extends Component {
               <div id="TopToggleHead" className="topbar-main"><a id="menu-toggle" href="#" className="hidden-xs"><i className="fa fa-bars"></i></a>
                   <form id="topbar-search" action="" method="" className="hidden-sm hidden-xs" style={{marginTop:-20}}>
                       <div id="SearchSite" className="input-icon right text-white"><a href="#"><i className="fa fa-search"></i></a><input type="text" placeholder="Search here..." className="search form-control text-white" id="searchbox"/><div id="display">
-  </div></div>
+                      </div></div>
                   </form>
     <ul className="nav navbar navbar-top-links navbar-right mbn">
-      <li id = "friends_li" ><a href="#" id="friendsLink"><i className="fa fa-users fa-fw"></i></a>
-      <div id="friendsContainer">
-  <div id="friendsTitle">Friends Notifications</div>
-  <div id="friendsBody" className="notifications"></div>
-  <div id="friendsFooter"><Link to="/friends">See All</Link></div>
-      </div>
+      <li className="dropdown">
+        <a className="dropdown-toggle" data-hover="dropdown" href="#">
+            <i className="fa fa-bell fa-users"></i>  <i className="fa fa-caret-down"></i>
+        </a>
+        <ul className="dropdown-menu dropdown-alerts sub4">
+            <li>
+              <Link to="/profile">
+                    <div>
+                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> Richard Igbiriki Added You
+                        <div style={{paddingLeft:5}}>
+                          <span className="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </div>
+              </Link>
+            </li>
+            <li className="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> 3 New Followers
+                        <span className="pull-right text-muted small">12 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li className="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> Accepted Friend Request
+                        <span className="pull-right text-muted small">4 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li className="divider"></li>
+            <li>
+                <Link className="text-center" to="/friends">
+                    <strong>See All Notifications</strong>
+                    <i className="fa fa-angle-right"></i>
+                </Link>
+            </li>
+        </ul>
       </li>
-          <li id="notification_li">
-  <a href="#" id="notificationLink"><i className="fa fa-bell fa-fw"></i></a>
-  <div id="notificationContainer">
-  <div id="notificationTitle">Notifications</div>
-  <div id="notificationsBody" className="notifications">
-  </div>
-  <div id="notificationFooter"><Link to="/notifications">See All</Link></div>
-  </div>
+      <li className="dropdown">
+        <a className="dropdown-toggle" data-hover="dropdown" href="#">
+            <i className="fa fa-bell fa-fw"></i>  <i className="fa fa-caret-down"></i>
+        </a>
+        <ul className="dropdown-menu dropdown-alerts sub4">
+            <li>
+                <a href="#">
+                    <div>
+                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> New Comment
+                        <span className="pull-right text-muted small">4 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li className="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> 3 New Followers
+                        <span className="pull-right text-muted small">12 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li className="divider"></li>
+            <li>
+                <a href="#">
+                    <div>
+                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> Server Rebooted
+                        <span className="pull-right text-muted small">4 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li className="divider"></li>
+            <li>
+                <Link className="text-center" to="/notifications">
+                    <strong>See All Notifications</strong>
+                    <i className="fa fa-angle-right"></i>
+                </Link>
+            </li>
+        </ul>
+    </li>
+    <li className="dropdown">
+        <a className="dropdown-toggle" data-hover="dropdown" href="#">
+        <i className="fa fa-envelope fa-fw"></i>  <i className="fa fa-caret-down"></i>
+        </a>
+        <ul className="dropdown-menu dropdown-messages sub2">
+        <li>
+        <a href="#">
+           <div>
+               <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span>&nbsp;
+                <strong style={{marginTop:10}}>John Smith</strong>
+               <span className="pull-right text-muted">
+                   <em>Yesterday</em>
+               </span>
+           </div>
+           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+        </a>
+        </li>
+        <li className="divider"></li>
+        <li>
+        <a href="#">
+           <div>
+               <strong>John Smith</strong>
+               <span className="pull-right text-muted">
+                   <em>Yesterday</em>
+               </span>
+           </div>
+           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+        </a>
+        </li>
+        <li className="divider"></li>
+        <li>
+        <a href="#">
+           <div>
+               <strong>John Smith</strong>
+               <span className="pull-right text-muted">
+                   <em>Yesterday</em>
+               </span>
+           </div>
+           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+        </a>
+        </li>
+        <li className="divider"></li>
+        <li>
+        <Link className="text-center" to="/messages">
+           <strong>Read All Messages</strong>
+           <i className="fa fa-angle-right"></i>
+        </Link>
+        </li>
+        </ul>
   </li>
-                      <li id="messages_link">
-                          <a  href="#" id="messagesLink"><i className="fa fa-envelope fa-fw"></i></a>
-                          <div id="messagesContainer">
-                              <div id="messagesTitle">Messages</div>
-                              <div id="messagesBody" className="notifications"></div>
-                              <div id="messagesFooter"><Link to="/messages">See All</Link></div>
+    <li className="dropdown">
+      <a className="dropdown-toggle" data-hover="dropdown" href="#">
+          <i className="fa fa-tasks fa-fw"></i>  <i className="fa fa-caret-down"></i>
+      </a>
+      <ul className="dropdown-menu dropdown-tasks sub3">
+          <li>
+              <a href="#">
+                  <div>
+                      <p>
+                          <strong>Task 1</strong>
+                          <span className="pull-right text-muted">40% Complete</span>
+                      </p>
+                      <div className="progress progress-striped active">
+                          <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width:40}}>
+                              <span className="sr-only">40% Complete (success)</span>
                           </div>
-                      </li>
-                      <li id="tasks_li">
-                      <a  href="#" id="tasksLink"><i className="fa fa-tasks fa-fw"></i></a>
-                          <div id="tasksContainer">
-                              <div id="tasksTitle">Tasks</div>
-                              <div id="tasksBody" className="notifications"></div>
-                              <div id="tasksFooter"><Link to="/tasks">See All</Link></div>
+                      </div>
+                  </div>
+              </a>
+          </li>
+          <li className="divider"></li>
+          <li>
+              <a href="#">
+                  <div>
+                      <p>
+                          <strong>Task 2</strong>
+                          <span className="pull-right text-muted">20% Complete</span>
+                      </p>
+                      <div className="progress progress-striped active">
+                          <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style={{width:20}}>
+                              <span className="sr-only">20% Complete</span>
                           </div>
-                      </li>
-                      <li id="adakaprofile" className="dropdown topbar-user"><a data-hover="dropdown" href="#" className="dropdown-toggle">
-                          <img src={this.state.profilePicture} style={{width:25,height:25, borderRadius:12.5}} /><span class="hidden-xs">{this.state.username}</span>&nbsp;<span className="caret"></span></a>
-                          <ul className="dropdown-menu dropdown-user pull-right">
-                              <li><Link to="/aboutme"><i className="fa fa-users"></i>My Profile</Link></li>
-                              <li><Link to="/profile"><i className="fa fa-user"></i>My Wall</Link></li>
-                              <li><Link to="/tasks"><i className="fa fa-tasks"></i>My Tasks</Link></li>
-                              <li><Link to="/registered_classes"><i className="fa fa-book"></i>My Classes</Link></li>
-                              <li className="divider"></li>
-                              <li ><a type="button" href="" onClick={()=>this.logOUT()}><i className="fa fa-key"></i>Log Out</a></li>
-                          </ul>
-                      </li>
-
-                  </ul>
-              </div>
-          </nav>
-
-          </div>
-
+                      </div>
+                  </div>
+              </a>
+          </li>
+          <li className="divider"></li>
+          <li>
+              <a href="#">
+                  <div>
+                      <p>
+                          <strong>Task 3</strong>
+                          <span className="pull-right text-muted">60% Complete</span>
+                      </p>
+                      <div className="progress progress-striped active">
+                          <div className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width:60}}>
+                              <span className="sr-only">60% Complete (warning)</span>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </li>
+          <li className="divider"></li>
+          <li>
+              <a href="#">
+                  <div>
+                      <p>
+                          <strong>Task 4</strong>
+                          <span className="pull-right text-muted">80% Complete</span>
+                      </p>
+                      <div className="progress progress-striped active">
+                          <div className="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{width:80}}>
+                              <span className="sr-only">80% Complete (danger)</span>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </li>
+          <li className="divider"></li>
+          <li>
+              <Link className="text-center" to="/tasks">
+                  <strong>See All Tasks</strong>
+                  <i className="fa fa-angle-right"></i>
+              </Link>
+          </li>
+      </ul>
+  </li>
+      <li id="adakaprofile" className="dropdown topbar-user"><a data-hover="dropdown" href="#" className="dropdown-toggle">
+          <img src={this.state.profilePicture} style={{width:25,height:25, borderRadius:12.5}} /><span className="hidden-xs">{this.state.username}</span>&nbsp;<span className="caret"></span></a>
+          <ul className="dropdown-menu dropdown-user pull-right">
+              <li><Link to="/aboutme"><i className="fa fa-users"></i>My Profile</Link></li>
+              <li><Link to="/profile"><i className="fa fa-user"></i>My Wall</Link></li>
+              <li><Link to="/tasks"><i className="fa fa-tasks"></i>My Tasks</Link></li>
+              <li><Link to="/registered_classes"><i className="fa fa-book"></i>My Classes</Link></li>
+              <li className="divider"></li>
+              <li ><a type="button" href="" onClick={()=>this.logOUT()}><i className="fa fa-key"></i>Log Out</a></li>
+          </ul>
+      </li>
+       <li id="topbar-chat" className="hidden-xs">
+         <a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" className="btn-chat">
+         <i className="fa fa-comments"></i><span className="badge badge-info">3</span></a>
+       </li>
+    </ul>
+    </div>
+    </nav>
+  </div>
           <div id="wrapper">
-
               <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
                   data-position="right" className="navbar-default navbar-static-side">
               <div className="sidebar-collapse menu-scroll">
@@ -289,6 +491,63 @@ export class Header extends Component {
               </div>
           </nav>
       </div>
+      <div id="chat-form" className="fixed">
+                <div className="chat-inner">
+                    <h2 className="chat-header">
+                        <a href="javascript:;" className="chat-form-close pull-right"><i className="glyphicon glyphicon-remove">
+                        </i></a><i className="fa fa-user"></i>&nbsp; Chat &nbsp;<span className="badge badge-info">3</span></h2>
+                    <div id="group-1" className="chat-group">
+                        <strong>Favorites</strong><a href="#"><span className="user-status is-online"></span> <small>
+                            Verna Morton</small> <span className="badge badge-info">2</span></a><a href="#"><span
+                                className="user-status is-online"></span> <small>Delores Blake</small> <span className="badge badge-info is-hidden">
+                                    0</span></a><a href="#"><span className="user-status is-busy"></span> <small>Nathaniel Morris</small>
+                                        <span className="badge badge-info is-hidden">0</span></a><a href="#"><span className="user-status is-idle"></span>
+                                            <small>Boyd Bridges</small> <span className="badge badge-info is-hidden">0</span></a><a
+                                                href="#"><span className="user-status is-offline"></span> <small>Meredith Houston</small>
+                                                <span className="badge badge-info is-hidden">0</span></a></div>
+                    <div id="group-2" className="chat-group">
+                        <strong>Office</strong><a href="#"><span className="user-status is-busy"></span> <small>
+                            Ann Scott</small> <span className="badge badge-info is-hidden">0</span></a><a href="#"><span
+                                className="user-status is-offline"></span> <small>Sherman Stokes</small> <span className="badge badge-info is-hidden">
+                                    0</span></a><a href="#"><span className="user-status is-offline"></span> <small>Florence
+                                        Pierce</small> <span className="badge badge-info">1</span></a></div>
+                    <div id="group-3" className="chat-group">
+                        <strong>Friends</strong><a href="#"><span className="user-status is-online"></span> <small>
+                            Willard Mckenzie</small> <span className="badge badge-info is-hidden">0</span></a><a
+                                href="#"><span className="user-status is-busy"></span> <small>Jenny Frazier</small>
+                                <span className="badge badge-info is-hidden">0</span></a><a href="#"><span className="user-status is-offline"></span>
+                                    <small>Chris Stewart</small> <span className="badge badge-info is-hidden">0</span></a><a
+                                        href="#"><span className="user-status is-offline"></span> <small>Olivia Green</small>
+                                        <span className="badge badge-info is-hidden">0</span></a></div>
+                </div>
+                <div id="chat-box" style={{top:400}}>
+                    <div className="chat-box-header">
+                        <a href="#" className="chat-box-close pull-right"><i className="glyphicon glyphicon-remove">
+                        </i></a><span className="user-status is-online"></span><span className="display-name">Willard
+                            Mckenzie</span> <small>Online</small>
+                    </div>
+                    <div className="chat-content">
+                        <ul className="chat-box-body">
+                            <li>
+                                <p>
+                                    <img src={logo} className="avt" /><span className="user">John Doe</span><span
+                                        className="time">09:33</span></p>
+                                <p>
+                                    Hi Swlabs, we have some comments for you.</p>
+                            </li>
+                            <li className="odd">
+                                <p>
+                                    <img src={logo} className="avt" /><span className="user">Swlabs</span><span
+                                        className="time">09:33</span></p>
+                                <p>
+                                    Hi, we're listening you...</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="chat-textarea">
+                        <input placeholder="Type your message" className="form-control" /></div>
+                </div>
+            </div>
       </div>
     )
   }

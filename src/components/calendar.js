@@ -10,7 +10,7 @@ export class Calendar extends Component {
     document.body.appendChild(script);
     var s   = document.createElement("script");
     s.type  = "text/javascript";
-    s.src   = "/script/mine.js";    // use this for linked script
+    s.src   = "/script/cal.js";    // use this for linked script
     document.body.appendChild(s);
   }
   render(){
