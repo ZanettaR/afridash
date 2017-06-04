@@ -281,20 +281,19 @@ export class Home extends Component {
                 <div className="page-content">
                   <div id="tab-general">
                     <div className="row mbl">
-
-                        <div style={{paddingTop:12}} id="sum_box">
-                          {this.state.courses.map((course, key) =>
-                          <Link to={"/courses/"+course.key}>
-                            <div className="col-sm-2">
-                              <div className="panel panel-blue db mbm">
-                                <div className="panel-body">
-                                  <h4><p className="description">
-                                    {course.code}</p></h4>
-                            </div>
+                      {this.state.courses.length !== 0 ? <div style={{paddingTop:12}} id="sum_box">
+                        {this.state.courses.map((course, key) =>
+                        <Link to={"/courses/"+course.key}>
+                          <div className="col-sm-2">
+                            <div className="panel panel-blue db mbm">
+                              <div className="panel-body">
+                                <h4><p className="description">
+                                  {course.code}</p></h4>
                           </div>
-                        </div></Link>
-                        )}
-                      </div>
+                        </div>
+                      </div></Link>
+                      )}
+                    </div> : <div></div>}
                     </div>
                     </div>
                     <div className="row mbl">
