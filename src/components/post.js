@@ -205,7 +205,6 @@ export class Post extends Component {
     )
   }
   showPost (post) {
-    alert(post.post)
     return (
       <div className="panel" id="update_panelBox">
       <div style={{borderBottomWidth:0}} className="panel-heading">
