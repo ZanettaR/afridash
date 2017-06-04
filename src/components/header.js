@@ -286,15 +286,6 @@ export class Header extends Component {
             <li>
                 <a href="#">
                     <div>
-                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> 3 New Followers
-                        <span className="pull-right text-muted small">12 minutes ago</span>
-                    </div>
-                </a>
-            </li>
-            <li className="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
                         <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> Server Rebooted
                         <span className="pull-right text-muted small">4 minutes ago</span>
                     </div>
@@ -309,56 +300,6 @@ export class Header extends Component {
             </li>
         </ul>
     </li>
-    <li className="dropdown">
-        <a className="dropdown-toggle" data-hover="dropdown" href="#">
-        <i className="fa fa-envelope fa-fw"></i>  <i className="fa fa-caret-down"></i>
-        </a>
-        <ul className="dropdown-menu dropdown-messages sub2">
-        <li>
-        <a href="#">
-           <div>
-               <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span>&nbsp;
-                <strong style={{marginTop:10}}>John Smith</strong>
-               <span className="pull-right text-muted">
-                   <em>Yesterday</em>
-               </span>
-           </div>
-           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-        </a>
-        </li>
-        <li className="divider"></li>
-        <li>
-        <a href="#">
-           <div>
-               <strong>John Smith</strong>
-               <span className="pull-right text-muted">
-                   <em>Yesterday</em>
-               </span>
-           </div>
-           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-        </a>
-        </li>
-        <li className="divider"></li>
-        <li>
-        <a href="#">
-           <div>
-               <strong>John Smith</strong>
-               <span className="pull-right text-muted">
-                   <em>Yesterday</em>
-               </span>
-           </div>
-           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-        </a>
-        </li>
-        <li className="divider"></li>
-        <li>
-        <Link className="text-center" to="/messages">
-           <strong>Read All Messages</strong>
-           <i className="fa fa-angle-right"></i>
-        </Link>
-        </li>
-        </ul>
-  </li>
     <li className="dropdown">
       <a className="dropdown-toggle" data-hover="dropdown" href="#">
           <i className="fa fa-tasks fa-fw"></i>  <i className="fa fa-caret-down"></i>
