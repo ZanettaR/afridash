@@ -39,10 +39,17 @@ export class Post extends Component {
   }
   readPost () {
     this.post = []
-    this.postRef.child(this.postId).once('value', (snapShot)=>{
-      this.post.push({key:snapShot.key, attachment:snapShot.val().attachment, attachmentType:snapShot.val().attachmentType, createdAt:snapShot.val().createdAt, post:snapShot.val().post, profilePicture:snapShot.val().profilePicture, starCount:snapShot.val().starCount,
-        userId:snapShot.val().userId, username:snapShot.val().username})
-        this.setState({post:this.post, postUser:snapShot.val().userId})
+    this.postRef.child(this.postId).once('value', (childSnap)=>{
+      if (childSnap.val().type === 'shared'){
+        this.post.push({type:'shared',caption:childSnap.val().caption, createdAt:childSnap.val().createdAt, postUser:childSnap.val().postUser, postUserId:childSnap.val().postUserId, postUserProfile:childSnap.val().postUserProfile,postKey:childSnap.val().postKey,
+          key:childSnap.key,comments:childSnap.val().comments, userId:childSnap.val().userId,username:childSnap.val().username,post:childSnap.val().post, sharedAt:childSnap.val().sharedAt,
+          profilePicture:childSnap.val().profilePicture, likes:childSnap.val().starCount, attachment:childSnap.val().attachment, attachmentType:childSnap.val().attachmentType,})
+        this.setState({post:this.post})
+      }else{
+        this.post.push({key:childSnap.key,comments:childSnap.val().comments, userId:childSnap.val().userId,username:childSnap.val().username,post:childSnap.val().post, createdAt:childSnap.val().createdAt, profilePicture:childSnap.val().profilePicture, likes:childSnap.val().starCount,
+          attachment:childSnap.val().attachment, attachmentType:childSnap.val().attachmentType,})
+        this.setState({post:this.post})
+      }
     })
   }
   handleSubmit (event) {
@@ -133,25 +140,7 @@ export class Post extends Component {
             <div className="col-sm-10 col-sm-offset-1" id="wrap">
               {this.state.post.map((post, key)=>
                 <div key={key} id="load_posts">
-                 <div className="panel" id="update_panelBox">
-                 <div style={{borderBottomWidth:0}} className="panel-heading">
-                     <div className="caption">
-                       <div className="row">
-                         <div className="col-sm-11">
-                           <img src={post.profilePicture} style={{height:30,width:30,borderRadius:15}}/>
-                           <Link to={"/profile/"+post.userId} style={{fontSize:14, fontWeight:'700',}} href='#'> {post.username} <span className="fa fa-globe" style={{fontSize:12}}> {TimeStamp.timeSince(post.createdAt)}</span></Link>
-                         </div>
-                       </div>
-                     </div>
-                   </div>
-                   <div id="1" className="panel-body post_box">
-                     <p style={{fontSize:14}}>{post.post}</p>
-                     <div className="row" style={{padding:10}}>
-                         {post.attachment !== '' ? <img src={post.attachment} style={{height:'300px'}} className="img-rounded img-responsive" /> : <div></div>
-                         }
-                     </div>
-                   </div>
-                 </div>
+                 {post.type === 'shared' ? this.showShared(post) : this.showPost(post)}
                </div>
               )}
               {this.state.comments.map((comment,key)=>
@@ -186,6 +175,57 @@ export class Post extends Component {
         </div>
     </div>
   </div>
+    )
+  }
+  showShared (post) {
+    return (
+      <div className="panel" id="update_panelBox">
+      <div style={{borderBottomWidth:0}} className="panel-heading">
+          <div className="caption">
+            <div className="row">
+              <div className="col-sm-11">
+                <img src={post.profilePicture} style={{height:30,width:30,borderRadius:15}}/>
+                <Link to={"/profile/"+post.userId} style={{fontSize:14, fontWeight:'700',}} href='#'> {post.username} <span className="fa fa-globe" style={{fontSize:12}}> {TimeStamp.timeSince(post.sharedAt)}</span></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="1" className="panel-body post_box">
+          <p style={{fontSize:14}}>{post.caption}</p>
+          <div  style={{padding:10,border:'1px solid #2980b9',padding:10, marginTop:10, borderRadius:10,}}>
+            <Link to={"/profile/"+post.postUserId}><img src={post.postUserProfile} style={{height:30,width:30,borderRadius:15}}/><span> {post.postUser}</span> <span className="fa fa-globe" style={{fontSize:12}}> {TimeStamp.timeSince(post.createdAt)}</span></Link>
+            <div className="row" style={{padding:10}}>
+            <Link to={"/post/"+post.postKey}><p>{post.post}</p>
+                {post.attachment !== '' ? <img src={post.attachment} height="200" className="img-rounded" /> : <div></div>}
+            </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  showPost (post) {
+    alert(post.post)
+    return (
+      <div className="panel" id="update_panelBox">
+      <div style={{borderBottomWidth:0}} className="panel-heading">
+          <div className="caption">
+            <div className="row">
+              <div className="col-sm-11">
+                <img src={post.profilePicture} style={{height:30,width:30,borderRadius:15}}/>
+                <Link to={"/profile/"+post.userId} style={{fontSize:14, fontWeight:'700',}} href='#'> {post.username} <span className="fa fa-globe" style={{fontSize:12}}> {TimeStamp.timeSince(post.createdAt)}</span></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="1" className="panel-body post_box">
+          <p style={{fontSize:14}}>{post.post}</p>
+          <div className="row" style={{padding:10}}>
+              {post.attachment !== '' ? <img src={post.attachment} style={{height:'300px'}} className="img-rounded img-responsive" /> : <div></div>
+              }
+          </div>
+        </div>
+      </div>
     )
   }
 }
