@@ -53,6 +53,7 @@ import {StartFinals} from './components/startfinals'
 import {ViewFinals} from './components/viewfinals'
 import {Forgot} from './components/forgotPassword'
 import SignUp from './components/signup'
+import {Post} from './components/post'
 import './index.css';
 render((
   //Render different routes
@@ -110,6 +111,8 @@ render((
       <Route path={'/finals/add'} component={AddFinals}/>
       <Route path={'/finals/start'} component={StartFinals}/>
       <Route path={'/finals/view'} component={ViewFinals}/>
+      <Route exact path={'/post/:id'} component={Post} />
+
     </Header>
       </Switch>
     </div>

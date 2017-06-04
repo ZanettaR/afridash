@@ -1,4 +1,13 @@
 $(document).ready(function () {
+  $('body').popover({
+    selector: '[data-toggle=popover]',
+    trigger:'focus',
+    html: true,
+    content: function () {
+        var content =  $(this).data("popover-content")
+        return $(content).removeClass('hide')
+    }
+});
   $('.newPost').hide()
   var showing = false
 $('.addButton').click(function(){

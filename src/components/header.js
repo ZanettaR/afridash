@@ -91,12 +91,6 @@ export class Header extends Component {
     script.src   = "/script/jquery.flot.spline.js";    // use this for linked script
     document.body.appendChild(script);
 
-    var s   = document.createElement("script");
-    s.type  = "text/javascript";
-    s.setAttribute('id', 'addedScript');
-    s.src   = "/script/bootstrap.min.js";    // use this for linked script
-    document.body.appendChild(s);
-
     var script   = document.createElement("script");
     script.type  = "text/javascript";
     script.setAttribute('id', 'addedScript');
@@ -185,13 +179,18 @@ export class Header extends Component {
        loggedIn:true,
        username:'',
        profilePicture:'none',
+       userId:'',
+       friends:[],
      }
      //Gives access to currentUser
      firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
+     this.friendsRef = firebase.database().ref().child('friends')
+     this.friends = []
    }
    handleUser (user) {
       if (user) {
-        this.setState({username:user.displayName, profilePicture:user.photoURL})
+        this.setState({username:user.displayName, profilePicture:user.photoURL,userId:user.uid})
+        this.retrieveFriends()
       }
    }
    logOUT() {
@@ -201,6 +200,12 @@ export class Header extends Component {
    // An error happened.
  });
  this.setState({loggedIn:false})
+   }
+   retrieveFriends () {
+     this.friendsRef.child(this.state.userId).on('child_added', (snapShot)=>{
+       this.friends.push({friendId:snapShot.key, displayName:snapShot.val().displayName})
+       this.setState({friends:this.friends})
+     })
    }
   render(){
     return (
@@ -473,7 +478,11 @@ export class Header extends Component {
                       <li id="yingifriends"><a href="#"><i className="fa fa-users fa-fw">
                           <div className="icon-bg bg-pink"></div>
                       </i><span className="menu-title">Friends</span><span className="fa arrow"></span></a>
-                          <ul className="nav nav-second-level scroll-forums"></ul>
+                          <ul className="nav nav-second-level scroll-forums">
+                            {this.state.friends.map((friend, key)=>
+                              <li key={key}><Link to={"/profile/"+friend.friendId}>{friend.displayName}</Link></li>
+                            )}
+                          </ul>
                       </li>
                       <li id="bayelsagrade"><Link to="/grades"><i className="fa fa-graduation-cap fa-fw">
                           <div className="icon-bg bg-pink"></div>

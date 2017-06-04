@@ -25,7 +25,7 @@ export class ToDo extends Component {
     }
     var ref = firebase.database().ref().child('todos').child(this.state.userId).push()
     ref.setWithPriority(data, 0 - Date.now())
-    this.setState({title:'',description:''})
+    this.setState({title:'',description:'',date:''})
     document.getElementById('title').focus()
     this.setState({status:'Successfully Added a To-Do Item'})
     this.readToDo()
@@ -66,11 +66,12 @@ export class ToDo extends Component {
         this.setState({todos:this.todos})
     })
   }
-  handleEdit (key){
-    alert(key)
-  }
   handleDelete (key) {
-    alert(key)
+    firebase.database().ref().child('todos').child(this.state.userId).child(key).remove()
+    this.todos = this.state.todos.filter((post)=>{
+      return post.key !== key
+    })
+    this.setState({todos:this.todos})
   }
   render() {
     return (
@@ -84,23 +85,24 @@ export class ToDo extends Component {
            <div role="tabpanel" className="tab-pane active" id="toDo">
              <div className="panel-group" id="accordion">
                {this.state.todos.map((todo,key)=>
-                 <div className="panel panel-info">
+                 <div key={key} className="panel panel-info">
                    <div className="panel-heading">
                      <h4 className="panel-title">
                        <a data-toggle="collapse" data-parent="#accordion" href={"#collapse"+key}>{todo.title} ***** {todo.date}</a>
                      </h4>
                    </div>
-                   <div id={"collapse"+key}className="panel-collapse collapse">
+                   <div id={"collapse"+key} className="panel-collapse collapse">
                      <div className="panel-body">
                        <p>{todo.description}</p>
                      </div>
                      <div className="panel-footer">
                        <span onClick={()=>this.handleDelete(todo.key)} className="fa fa-remove btn btn-danger"> Delete</span>&nbsp;&nbsp;
-                       <span onClick={()=>this.handleEdit(todo.key)} className="fa fa-pencil btn btn-primary"> Edit</span>
                      </div>
                    </div>
                  </div>
                )}
+               {this.state.todos.length > 0 ? <div></div> : <p>There are no items on your list. Add an Item</p>
+               }
              </div>
            </div>
            <div role="tabpanel" className="tab-pane fade" id="addNew">
@@ -112,7 +114,7 @@ export class ToDo extends Component {
                              </div>
                       <div className="form-group">
                           <label htmlFor="date"> Date</label>
-                            <input style={{width:150,}}  id="myDate" value="Pick a date"  type="text"  />
+                            <input style={{width:150,}} value={this.state.date}  id="myDate"  type="text"  />
                             <input style={{display:'none'}} name="due_date" type="text" id="dateVal" className="form-control" />
                              </div>
                       <div className="form-group">
