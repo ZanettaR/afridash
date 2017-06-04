@@ -22,9 +22,6 @@ constructor(props){
     }
     this.handleCheckboxClick=this.handleCheckboxClick.bind(this)
     this.handleSubmit=this.handleSubmit.bind(this)
-    this.handleSelect=this.handleSelect.bind(this)
-
-
     firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
 }
 componentDidMount () {
@@ -41,144 +38,91 @@ handleUser(user){
     this.setState({userId:user.uid})
     this.readPreRegistration()
     this.readRegistration()
-    this.hideCourse()
   }
 }
-handleCheckboxClick (event, course, key) {
-  course.selected = !course.selected;
-  var clone = this.state.courses
-  clone[key] = course
-  let {selectedCoursesID} =this.state
-  if(course.selected){
-    //console.log("selected", cours)
- selectedCoursesID.push({key:course.key})
-  }
-  else
-  {
-  selectedCoursesID = selectedCoursesID.filter((c)=>
-{
-  return c.key !== course.key
-})
-  }
-   this.setState({courses:clone, selectedCoursesID});
+handleCheckboxClick (course, key) {
+   //Same as handleDropBox below :-)
+    course.selected = !course.selected;
+    var clone = this.state.courses
+    clone[key] = course
+    let {selectedCoursesID} =this.state
+     course.selected ? selectedCoursesID.push({key:course.key}) : selectedCoursesID = selectedCoursesID.filter((c)=> { return c.key !== course.key})
+     this.setState({courses:clone, selectedCoursesID});
 }
-handleDropBox(course, key)
-{
-  course.selected = !course.selected;
-  var clone = this.state.selectedCourses
-  clone[key] = course
-  let {dropCourses} =this.state
-  if(course.selected){
-    //console.log("selected", cours)
- dropCourses.push({key:course.key})
-  }
-  else
-  {
-  dropCourses = dropCourses.filter((c)=>
-{
-  return c.key !== course.key
-})
-  }
-   this.setState({selectedCourses:clone, dropCourses});
+handleDropBox(course, key){
+      course.selected = !course.selected; //Negate the value of the checkbox
+      var clone = this.state.selectedCourses //Make a clone of the state variable
+      clone[key] = course //Update the item at the index[key]
+      let {dropCourses} =this.state
+      //Determine if the box was checked or unchecked (add to dropCourses list or remove from it)
+      course.selected ? dropCourses.push({key:course.key}) : dropCourses = dropCourses.filter((c)=> {return c.key !== course.key })
+      this.setState({selectedCourses:clone, dropCourses});
 }
 handleDrop(){
-  let  {dropCourses} = this.state
-  dropCourses.map((course)=>
-{
-  firebase.database().ref().child('registration').child(this.state.userId).once('value', (snapshot)=>{
-  snapshot.forEach((childSnapShot)=>{
-    if(childSnapShot.val() === course.key){
-      childSnapShot.ref.remove()
-    }
-  })
-})
-})
+      let  {dropCourses} = this.state
+      dropCourses.map((course)=>
+    {
+      firebase.database().ref().child('registration').child(this.state.userId).once('value', (snapshot)=>{
+      snapshot.forEach((childSnapShot)=>{
+        if(childSnapShot.val() === course.key){
+          childSnapShot.ref.remove()
+          this.hideCourse(course.key, 'drop') //Remove the course being dropped from the registration db
+        }
+      })
+    })
+    })
 }
 
 handleDelete (){
-  let  {selectedCoursesID} = this.state
-  selectedCoursesID.map((course)=>
-{
-  firebase.database().ref().child('preregistration').child(this.state.userId).once('value', (snapshot)=>{
-  snapshot.forEach((childSnapShot)=>{
-    if(childSnapShot.val() === course.key){
-      childSnapShot.ref.remove()
-    }
+    let  {selectedCoursesID} = this.state
+    selectedCoursesID.map((course)=> {
+    firebase.database().ref().child('preregistration').child(this.state.userId).once('value', (snapshot)=>{
+    snapshot.forEach((childSnapShot)=>{
+      if(childSnapShot.val() === course.key){
+        childSnapShot.ref.remove() //Delete course using its reference
+        this.hideCourse(course.key, 'register')
+        }
+      })
+    })
   })
-})
-})
-this.setState({selectedCoursesID:[]})
+  this.setState({selectedCoursesID:[]})
 }
-handleSelect(event){
-  event.preventDefault();
-  selected:true
-}
-
+//Handle submit event
 handleSubmit (event) {
 
+  // TODO: I have completed most of the functionalities. However, I wanted to let you think about how you can prevent a student from registering more than once into one class.
+  // TODO: While it may be unthoughtful for students to do so, accidents happen, and some people outrightly try to just see what happens.
+  //Hint: The key to solving this lies in the fact that we are storing every registered class under the user/student. Good luck! :-)
+
   event.preventDefault();
- const  {selectedCoursesID} = this.state;
- selectedCoursesID.map((course)=>
-{
-  firebase.database().ref().child('registration').child(this.state.userId).push(course.key)
-})
-
-this.handleDelete()
-this.handleDrop()
-this.readRegistration()
-}
-
-hideCourse(){
-  console.log(this.state.courses);
-firebase.database().ref().child('preregistration').child(this.state.userId).on('child_removed',(snapShot)=>{
-   this.courses = this.state.selectedCourses.filter((course)=>
-    {
-console.log(snapShot.val())
-     return course.key !== snapShot.val()
-
-   })
-console.log(this.courses);
-    this.setState({courses:this.courses})
- })
- firebase.database().ref().child('registration').child(this.state.userId).on('child_removed',(snapShot)=>{ this.courses=[]
-    this.courses = this.state.selectedCourses.filter((course)=>
-     {
-
-      return course.key !== snapShot.val()
-
+   const  {selectedCoursesID} = this.state;
+   selectedCoursesID.map((course)=> {
+     firebase.database().ref().child('registration').child(this.state.userId).push(course.key)//Store the registered course under the userId
+     firebase.database().ref().child('registeredCourses').child(course.key).push(this.state.userId)//Store the userId under the course for course activities
     })
 
-     this.setState({selectedCourses:this.courses})
-  })
-
+  this.handleDelete() //Delete the courses that were selected to be registered from the preregistration db
+  this.handleDrop() //Delete the courses that were selected for drop from the registration db
+  this.readRegistration() //Retrieve and display the current list of registered classes
+}
+//Remove courses from the display once they have been either registered or drop
+hideCourse(key, type){
+  if (type === 'register'){ //If the user is registering for a class
+    this.remainder = this.state.courses.filter((c)=>{ return c.key !== key}) //Filter the courses, return only the ones that haven't been registered
+    this.setState({courses:this.remainder})//Change the state of the courses being displayed
+  }else if (type === 'drop'){
+    this.remainder = this.state.selectedCourses.filter((c)=>{ return c.key !== key})//Filter the courses and return only the ones the user is not dropping
+    this.setState({selectedCourses:this.remainder})
+  }
 
 }
 
-
-readCourses (department){
-
-  this.courses=[]
-  this.setState({courses:[],copyCourses:[]})
-  var ref = firebase.database().ref().child('courses').orderByChild("department").equalTo(department)
-  ref.on('child_added', (snap)=>{
-      this.courses.push({
-        selected:false,
-         key:snap.key,
-          title:snap.val().title,
-          code:snap.val().code, credit:snap.val().credit,description:snap.val().description,level:snap.val().level,semester:snap.val().semester
-      })
-      this.setState({courses:this.courses, copyCourses:this.courses})
-
-  })
-
-
-}
-readPreRegistration (){
+readPreRegistration (){ //Retrieve the preregistered classes from the firebase db
   this.preRegistration=[]
   this.courses=[]
-  firebase.database().ref().child("preregistration").child(this.state.userId).once('value', (snapshot)=>
+  firebase.database().ref().child("preregistration").child(this.state.userId).once('value', (snapshot)=> //Retrieve the Id's of the classes under the user
   {
-    snapshot.forEach((childSnapShot)=> {
+    snapshot.forEach((childSnapShot)=> { //Using the Id's retrieve the information about the courses
       var ref = firebase.database().ref().child('courses').child(childSnapShot.val())
       ref.once('value', (snap)=>{
           this.courses.push({
@@ -191,17 +135,17 @@ readPreRegistration (){
             semester:snap.val().semester,
             selected: false
           })
-          this.setState({courses:this.courses})
+          this.setState({courses:this.courses}) //Store the information for display
 
       })
     })
   })
 }
-readRegistration(){
+readRegistration(){ //Retrieve the already registered classes from  the firebase db
   let selectedCourses=[];
-  firebase.database().ref().child("registration").child(this.state.userId).once('value', (snapshot)=>
+  firebase.database().ref().child("registration").child(this.state.userId).once('value', (snapshot)=> //Retrieve the Id's of the classes the user has registered
   {
-    snapshot.forEach((childSnapShot)=> {
+    snapshot.forEach((childSnapShot)=> { //Same as above
       var ref = firebase.database().ref().child('courses').child(childSnapShot.val())
       ref.once('value', (snap)=>{
           selectedCourses.push({
@@ -221,9 +165,15 @@ readRegistration(){
   })
 
 }
-
-//var add = ('select option[selected="selected"]').val();
-//var drop=[drop];
+handleRemoveCourse(key){
+  //Remove course from firebase
+  firebase.database().ref().child('preregistration').child(this.state.userId).once('value', (snapshot)=>{ //Retrieve all preregistered courses at once
+    snapshot.forEach((childSnapShot)=>{ //Loop through each course using forEach
+      if(childSnapShot.val()===key) childSnapShot.ref.remove() //Remove the course with the specified key
+    })
+  })
+  this.hideCourse(key, 'register') //Remove from the table
+}
   render(){
     return(
       <div id="page-wrapper">
@@ -274,14 +224,12 @@ readRegistration(){
                               value={course.key}
                               name="check_list[]"
                               checked={course.selected}
-                              onClick={(event) => {this.handleCheckboxClick(event,course, key)}} />
+                              onClick={(event) => {this.handleCheckboxClick(course, key)}} />
                              &nbsp;&nbsp;&nbsp;
                            </div>
-                            <div className="col-sm-6"><a><i className="fa fa-close" href="#" id="dropclassName" ></i></a></div>
+                            <div className="col-sm-6"><span style={{cursor:'pointer'}} onClick={()=>this.handleRemoveCourse(course.key)} className="fa fa-close" href="#" id="dropclassName" ></span></div>
                           </div>
-
-
-        </td>
+                        </td>
                         <td>{course.title}</td>
                         <td>{course.code}</td>
                         <td>{course.credit}</td>
@@ -300,9 +248,8 @@ readRegistration(){
 
 
 
-
 <h1 className="text-center">Registered Classes</h1>
-<div className="panel-body">
+{this.state.selectedCourses.length !== 0 ? <div className="panel-body">
 <div className="dataTable_wrapper">
 <table className="table table-striped table-bordered table-hover" id="dataTables-example">
 
@@ -339,13 +286,19 @@ readRegistration(){
     </tbody>
     </table>
   </div>
-    <div className="container" style={{marginBottom:50}} >
+  <div className="container" style={{marginBottom:50}} >
 
-      <button type="button" name="register" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>&nbsp;
+    <button type="button" name="register" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>&nbsp;
 
-      <Link className="btn btn-danger" to="/advising">Close</Link>
-    </div>
+    <Link className="btn btn-danger" to="/advising">Close</Link>
   </div>
+</div> : <div className="col-sm-4 col-sm-offset-4"><p  className="text-center lead">There are no registered courses</p>
+<div className="text-center" >
+  <button type="button" name="register" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>&nbsp;
+  <Link className="btn btn-danger" to="/advising">Close</Link>
+</div>
+</div>}
+
 </div>
         </div>
     </div>
