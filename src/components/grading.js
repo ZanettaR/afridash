@@ -1,7 +1,30 @@
 import React, {Component} from 'react'
 import {Link, browserHistory } from 'react-router-dom'
 import Auth from '../jsHelpers/auth'
+const firebase = require('firebase')
+import {Firebase} from '../jsHelpers/firebase'
 export class Grading extends Component {
+  constructor(props){
+    super(props)
+    this.courseRef = firebase.database().ref().child('courses')
+    this.course=[]
+    this.state = {
+      title:'',
+      key:'',
+    }
+    this.postId = this.props.match.params.id
+  }
+
+  readCourses(){
+        this.courseRef.child(this.postId).once('value', (snapShot)=>{
+          this.setState({key:snapShot.key, title:snapShot.val().title})
+      })
+  }
+
+  componentWillMount () {
+    this.readCourses()
+  }
+
   render() {
     return (
       <div id="page-wrapper">
@@ -24,7 +47,7 @@ export class Grading extends Component {
                               <div className="panel-heading">
                                   <p style = {{float:'right'}}>Curve</p>
                                   <h3>Gradebook</h3>
-                                  <p>Course Name:</p>
+                                  <p>Course Name: {this.state.title}</p>
                                   <p>Room: LT2</p>
                                   <p>Time: 2:00PM - 4:00PM</p>
                               </div>

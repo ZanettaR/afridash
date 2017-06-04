@@ -85,7 +85,7 @@ render((
       <Route path={'/generator'} component={RGenerator} />
       <Route path={'/resume'} component={Resume} />
       <Route path={'/evaluation'} component={Evaluation} />
-      <Route path={'/grading'} component={Grading} />
+      <Route path={'/grading/:id'} component={Grading} />
       <Route path={'/attendance'} component={Attendance} />
       <Route path={'/registration'} component={Registration}/>
       <Route path={'/forums'} component={Forums}/>
