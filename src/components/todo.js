@@ -12,7 +12,7 @@ export class ToDo extends Component {
       <div>
         <h1> My To-Do List </h1>
          <ul className="nav nav-tabs" role="tablist">
-           <li role="presentation" className="active"><a href="#toDo" aria-controls="home" role="tab" data-toggle="tab">To Do</a></li>
+           <li role="presentation" className="active"><Link to="#toDo" aria-controls="home" role="tab" data-toggle="tab">To Do</Link></li>
            <li role="presentation"><a href="#addNew" aria-controls="profile" role="tab" data-toggle="tab">Add New</a></li>
          </ul>
          <div className="tab-content">
