@@ -1,7 +1,126 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Auth from '../jsHelpers/auth'
+const firebase = require('firebase')
+import {Firebase} from '../jsHelpers/firebase'
 export class AddClass extends Component{
+  constructor(props){
+    super(props)
+    this.user = firebase.auth().currentUser
+    this.courses = []
+    this.preregistration =[]
+    this.state = {
+
+      department:'',
+      title:'',
+      code:'',
+      credit:'',
+      description:'',
+      semester:'',
+      level:'none',
+      error:"This class has aready been added",
+      courses:[],
+      copyCourses:[],
+      departments:[],
+      preRegistration: [],
+      checked:false,
+      selected:false
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSelect=this.handleSelect.bind(this)
+    this.handleLevel=this.handleLevel.bind(this)
+    this.handleSubmit=this.handleSubmit.bind(this)
+    this.handleCheck=this.handleCheck.bind(this)
+  }
+  async componentWillMount () {
+      await firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
+    }
+
+  handleChange (event) {
+  this.setState({
+    [event.target.name] :event.target.value
+  })
+  }
+  handleSelect (event){
+  this.readCourses(event.target.value)
+  this.setState({
+    department:event.target.value, selected:true
+  })
+
+  }
+
+  handleLevel(event){
+  this.setState({
+  level:event.target.value
+  })
+  this.readCoursesWithLevel(event.target.value)
+  }
+
+  handleSubmit (event) {
+  event.preventDefault();
+  }
+
+
+  handleCheck (event) {
+    firebase.database().ref().child('preregistration').child(this.state.userId).push(event.target.value)
+    this.hideCourse(event.target.value)
+  }
+  hideCourse(courseKey){
+    this.courses=[]
+       this.courses = this.state.courses.filter((course)=>
+        {
+
+         return course.key !== courseKey
+
+       })
+
+        this.setState({courses:this.courses})
+  }
+
+
+  handleUser (user) {
+  if (user) {
+   this.setState({userId:user.uid})
+   this.readDepartments()
+  }
+  }
+  readDepartments () {
+    this.departments=[]
+    this.setState({departments:[]})
+    var ref = firebase.database().ref().child('departments')
+    ref.on('child_added', (snap)=>{
+        this.departments.push({name:snap.val()})
+        this.setState({departments:this.departments})
+    })
+  }
+  readCourses (department){
+
+    this.courses=[]
+    this.setState({courses:[],copyCourses:[]})
+    var ref = firebase.database().ref().child('courses').orderByChild("department").equalTo(department)
+    ref.on('child_added', (snap)=>{
+        this.courses.push({
+          key:snap.key, title:snap.val().title,code:snap.val().code, credit:snap.val().credit,description:snap.val().description,level:snap.val().level,semester:snap.val().semester
+        })
+        this.setState({courses:this.courses, copyCourses:this.courses})
+
+    })
+
+
+  }
+
+  readCoursesWithLevel(level)
+  {
+    this.courses=[]
+       this.courses = this.state.copyCourses.filter((course)=>
+        {
+         return course.level === level
+
+       })
+
+        this.setState({courses:this.courses})
+  }
+
   render(){
     return (
       <div id="page-wrapper">
@@ -24,14 +143,16 @@ export class AddClass extends Component{
             <div className="row mbl">
             <div className="col-lg-12 col-sm-12">
             <div className="row">
-            <p>Choose a Subject and a Level for all available courses:</p>
+            <h4>Choose a Subject and a Level for all available courses, check to add a class</h4>
               <form role="form"  method="post">
                 <div className="col-md-6">
                   <div className="form-group">
                     <label htmlFor="sel1">Subjects:</label>
-                    <select className="form-control" id="sel3" name="subject">
+                    <select className="form-control" id="sel3" onChange={this.handleSelect} name="subject">
                       <option></option>
-                      <option value="Biology">Biology</option>
+                      {this.state.departments.map((department, key) =>
+                      <option value={department.name} key={key} >{department.name}  </option>
+                      )}
                     </select>
                     <br/>
                   </div>
@@ -39,8 +160,8 @@ export class AddClass extends Component{
               <div className="col-md-6">
                 <div className="form-group">
                   <label htmlFor="sel1">Level:</label>
-                  <select className="form-control" id="sel4" name="level">
-                    <option></option>
+                  <select className="form-control" id="sel4" onChange={this.handleLevel} name="level">
+                  {this.state.selected ? <option selected></option> : <option></option> }
                     <option value="100">100</option>
                     <option value="200">200</option>
                     <option value="300">300</option>
@@ -51,10 +172,49 @@ export class AddClass extends Component{
               </div>
             </div>
           </form>
-          <div className="SearchResult1"></div>
+
+          <div id="Result">
+            {this.state.courses.length !==0 ?
+              <div className="panel-body">
+                   <div className="dataTable_wrapper">
+                       <table className="table table-striped table-bordered table-hover" id="dataTables-example">
+                           <thead>
+                               <tr>
+                               <td>Select</td>
+                               <th>Course Title</th>
+                               <th>Course Code</th>
+                               <th>Credits</th>
+                               <th>Description</th>
+                               <th>Semester</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+
+                   {this.state.courses.map((course, key)=>
+
+                       <tr key={key}>
+                       <td><input type="checkbox" value={course.key} name="check_list[]" onClick={this.handleCheck} className="form-control"  /> &nbsp;&nbsp;&nbsp;<a href="#" id="dropclassName"></a></td>
+                       <td>{course.title}</td>
+                       <td>{course.code}</td>
+                       <td>{course.credit}</td>
+                       <td>{course.description}</td>
+                       <td>{course.semester}</td>
+                     </tr>
+
+
+                     )}
+                       </tbody>
+                   </table>
+                   </div>
+               </div> : <div className="container">
+                 <h3>There are no classes available yet</h3>
+               </div> }
+
+          </div>
             <div className="row mbl">
-              <div className="col-md-8 col-sm-offset-2">
+            <div className="col-md-8 col-sm-offset-2">
                 <div className="container" style={{marginBottom:50}} >
+                  <button type="button" name="register" onClick={this.handleSubmit} className="btn btn-primary"><Link to="/registration">Continue</Link></button>&nbsp;
                  <Link className="btn btn-danger" to="/advising">Close</Link>
                 </div>
                 </div>
