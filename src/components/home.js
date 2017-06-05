@@ -21,7 +21,7 @@ export class Home extends Component {
     this.postsRef = firebase.database().ref().child('posts')
     this.userPosts = firebase.database().ref().child('usersPosts')
     this.state = {
-      name:'Richard',
+      name:'',
       loggedIn:true,
       file:"",
       post:"",
@@ -47,7 +47,7 @@ export class Home extends Component {
   }
   async componentWillMount () {
     await firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
-    this.loadJS() //load local javascript
+    this.loadJS() //load local javascript for dashboard
   }
   handlePost (event) {
    this.setState({[event.target.name]:event.target.value})

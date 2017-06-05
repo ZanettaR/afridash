@@ -44,11 +44,11 @@ export class Post extends Component {
         this.post.push({type:'shared',caption:childSnap.val().caption, createdAt:childSnap.val().createdAt, postUser:childSnap.val().postUser, postUserId:childSnap.val().postUserId, postUserProfile:childSnap.val().postUserProfile,postKey:childSnap.val().postKey,
           key:childSnap.key,comments:childSnap.val().comments, userId:childSnap.val().userId,username:childSnap.val().username,post:childSnap.val().post, sharedAt:childSnap.val().sharedAt,
           profilePicture:childSnap.val().profilePicture, likes:childSnap.val().starCount, attachment:childSnap.val().attachment, attachmentType:childSnap.val().attachmentType,})
-        this.setState({post:this.post})
+        this.setState({post:this.post,postUser:childSnap.val().userId})
       }else{
         this.post.push({key:childSnap.key,comments:childSnap.val().comments, userId:childSnap.val().userId,username:childSnap.val().username,post:childSnap.val().post, createdAt:childSnap.val().createdAt, profilePicture:childSnap.val().profilePicture, likes:childSnap.val().starCount,
           attachment:childSnap.val().attachment, attachmentType:childSnap.val().attachmentType,})
-        this.setState({post:this.post})
+        this.setState({post:this.post, postUser:childSnap.val().userId})
       }
     })
   }

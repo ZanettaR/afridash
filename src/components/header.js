@@ -20,6 +20,7 @@ import './css/todo.css'
 import './css/hopscotch.min.css'
 import './css/mikes-modal.css'
 import './css/emojionearea.min.css'
+import * as TimeStamp from '../jsHelpers/timestamp'
 export class Header extends Component {
   componentDidMount () {
     /*
@@ -181,17 +182,30 @@ export class Header extends Component {
        profilePicture:'none',
        userId:'',
        friends:[],
+       notifications:[]
      }
      //Gives access to currentUser
      firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
      this.friendsRef = firebase.database().ref().child('friends')
+     this.notificationsRef = firebase.database().ref().child('notifications')
+     this.usersNotif = firebase.database().ref().child('user_notifications')
      this.friends = []
    }
    handleUser (user) {
       if (user) {
         this.setState({username:user.displayName, profilePicture:user.photoURL,userId:user.uid})
         this.retrieveFriends()
+        this.listenForNotifications()
       }
+   }
+   listenForNotifications () {
+     this.notifications = []
+     this.usersNotif.child(this.state.userId).on('child_added', (snapShot)=>{
+       this.notificationsRef.child(snapShot.val()).once('value', (notif)=>{
+         this.notifications.push({createdAt:notif.val().createdAt, displayName:notif.val().displayName, postId:notif.val().postId, profilePicture:notif.val().profilePicture, type:notif.val().type, userId:notif.val().userKey})
+         this.setState({notifications:this.notifications})
+       })
+     })
    }
    logOUT() {
    firebase.auth().signOut().then(function() {
@@ -206,6 +220,60 @@ export class Header extends Component {
        this.friends.push({friendId:snapShot.key, displayName:snapShot.val().displayName})
        this.setState({friends:this.friends})
      })
+   }
+   showNotifications (notification, key){
+     switch (notification.type) {
+       case 'post_like':
+         return this.showPostLike (notification, key)
+         break
+       case 'comment':
+          return this.showComment (notification,key)
+          break
+       case 'comment_like':
+          return this.showCommentLike (notification, key)
+       default:
+       return null
+
+     }
+   }
+   showPostLike (notification, key) {
+     return (
+       <li key={key}>
+           <Link to={'/post/'+notification.postId}>
+               <div>
+                   <span><img src={notification.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> New Post Like
+                   <span className="pull-right text-muted small">{TimeStamp.timeSince(notification.createdAt)}</span>
+               </div>
+           </Link>
+           <li className="divider"></li>
+       </li>
+     )
+   }
+   showComment (notification, key) {
+     return (
+       <li key={key}>
+         <Link to={'/post/'+notification.postId}>
+             <div>
+                 <span><img src={notification.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> New Comment
+                 <span className="pull-right text-muted small">{TimeStamp.timeSince(notification.createdAt)}</span>
+             </div>
+         </Link>
+         <li className="divider"></li>
+     </li>
+   )
+   }
+   showCommentLike (notification, key) {
+     return (
+       <li key={key}>
+           <Link to={'/post/'+notification.postId}>
+               <div>
+                   <span><img src={notification.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> New Comment Like
+                   <span className="pull-right text-muted small">{TimeStamp.timeSince(notification.createdAt)}</span>
+               </div>
+           </Link>
+           <li className="divider"></li>
+       </li>
+     )
    }
   render(){
     return (
@@ -274,24 +342,9 @@ export class Header extends Component {
             <i className="fa fa-bell fa-fw"></i>  <i className="fa fa-caret-down"></i>
         </a>
         <ul className="dropdown-menu dropdown-alerts sub4">
-            <li>
-                <a href="#">
-                    <div>
-                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> New Comment
-                        <span className="pull-right text-muted small">4 minutes ago</span>
-                    </div>
-                </a>
-            </li>
-            <li className="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <span><img src={this.state.profilePicture} style={{width:20,height:20, borderRadius:10}} /></span> Server Rebooted
-                        <span className="pull-right text-muted small">4 minutes ago</span>
-                    </div>
-                </a>
-            </li>
-            <li className="divider"></li>
+          {this.state.notifications.map((notification,key)=>
+              this.showNotifications(notification, key)
+          )}
             <li>
                 <Link className="text-center" to="/notifications">
                     <strong>See All Notifications</strong>
@@ -376,7 +429,7 @@ export class Header extends Component {
               </Link>
           </li>
       </ul>
-  </li>
+    </li>
       <li id="adakaprofile" className="dropdown topbar-user"><a data-hover="dropdown" href="#" className="dropdown-toggle">
           <img src={this.state.profilePicture} style={{width:25,height:25, borderRadius:12.5}} /><span className="hidden-xs">{this.state.username}</span>&nbsp;<span className="caret"></span></a>
           <ul className="dropdown-menu dropdown-user pull-right">
@@ -395,7 +448,7 @@ export class Header extends Component {
     </ul>
     </div>
     </nav>
-  </div>
+    </div>
           <div id="wrapper">
               <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
                   data-position="right" className="navbar-default navbar-static-side">
