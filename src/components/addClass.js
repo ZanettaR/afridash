@@ -156,11 +156,11 @@ export class AddClass extends Component{
         this.courses.push({
           key:snap.key, title:snap.val().title,code:snap.val().code, credit:snap.val().credit,description:snap.val().description,level:snap.val().level,semester:snap.val().semester
         })
-        const inArray = (needle, haystack) => {
-          console.log('got here',needle, haystack);
-          var length = haystack.length;
+        const inArray = (course, courses) => {
+          console.log('got here',course, courses);
+          var length = courses.length;
           for(var i = 0; i < length; i++) {
-              if(haystack[i].key == needle.key) return true;
+              if(courses[i].key == course.key) return true;
           }
           return false
         }
