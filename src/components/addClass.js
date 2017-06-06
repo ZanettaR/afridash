@@ -20,6 +20,8 @@ export class AddClass extends Component{
       level:'none',
       error:"This class has aready been added",
       courses:[],
+      preRegistered:[],
+      registeredCourses:[],
       copyCourses:[],
       departments:[],
       preRegistration: [],
@@ -82,8 +84,60 @@ export class AddClass extends Component{
   if (user) {
    this.setState({userId:user.uid})
    this.readDepartments()
+   this.readPreRegistration()
+   this.readRegistration()
   }
   }
+  readPreRegistration (){ //Retrieve the preregistered classes from the firebase db
+    this.preRegistration=[]
+    this.courses=[]
+    firebase.database().ref().child("preregistration").child(this.state.userId).once('value', (snapshot)=> //Retrieve the Id's of the classes under the user
+    {
+      snapshot.forEach((childSnapShot)=> { //Using the Id's retrieve the information about the courses
+        var ref = firebase.database().ref().child('courses').child(childSnapShot.val())
+        ref.once('value', (snap)=>{
+            this.courses.push({
+              key:snap.key,
+              title:snap.val().title,
+              code:snap.val().code,
+              credit:snap.val().credit,
+              description:snap.val().description,
+              level:snap.val().level,
+              semester:snap.val().semester,
+              selected: false
+            })
+            this.setState({preRegistered:this.courses}) //Store the information for display
+
+        })
+      })
+    })
+  }
+
+  readRegistration(){ //Retrieve the already registered classes from  the firebase db
+    let registeredCourses=[];
+    firebase.database().ref().child("registration").child(this.state.userId).once('value', (snapshot)=> //Retrieve the Id's of the classes the user has registered
+    {
+      snapshot.forEach((childSnapShot)=> { //Same as above
+        var ref = firebase.database().ref().child('courses').child(childSnapShot.val())
+        ref.once('value', (snap)=>{
+            registeredCourses.push({
+              key:snap.key,
+              title:snap.val().title,
+              code:snap.val().code,
+              credit:snap.val().credit,
+              description:snap.val().description,
+              level:snap.val().level,
+              semester:snap.val().semester,
+              selected: false
+            })
+            this.setState({registeredCourses})
+
+        })
+      })
+    })
+
+  }
+
   readDepartments () {
     this.departments=[]
     this.setState({departments:[]})
@@ -102,7 +156,20 @@ export class AddClass extends Component{
         this.courses.push({
           key:snap.key, title:snap.val().title,code:snap.val().code, credit:snap.val().credit,description:snap.val().description,level:snap.val().level,semester:snap.val().semester
         })
-        this.setState({courses:this.courses, copyCourses:this.courses})
+        const inArray = (needle, haystack) => {
+          console.log('got here',needle, haystack);
+          var length = haystack.length;
+          for(var i = 0; i < length; i++) {
+              if(haystack[i].key == needle.key) return true;
+          }
+          return false
+        }
+        let {preRegistered,registeredCourses} = this.state;//set the state to carry both register and preregister table
+
+        const filteredCourses = this.courses.filter((course) => {
+            return !inArray(course, preRegistered) && !inArray(course, registeredCourses);//this filters the display to show only if you haven't added to the register or preregistered table
+        })
+        this.setState({courses:filteredCourses, copyCourses:filteredCourses})
 
     })
 

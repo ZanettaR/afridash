@@ -1,7 +1,68 @@
 import React, {Component} from 'react'
 import {Link } from 'react-router-dom'
 import Auth from '../jsHelpers/auth'
+const firebase = require('firebase')
+import {Firebase} from '../jsHelpers/firebase'
 export class Registered_classes extends Component {
+  constructor(props){
+    super(props)
+    this.user = firebase.auth().currentUser
+    this.courses=[]
+    this.state={
+      courses:[],
+      preRegistration:[],
+      registration:[],
+      add:[],
+      drop:[],
+      courseIds: [],
+      selectedCoursesID: [],
+      selectedCourses:[],
+      dropCourses:[],
+      selected:false
+      }
+      firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
+  }
+  componentDidMount () {
+
+    }
+
+  handleUser(user){
+    if(user){
+      this.setState({userId:user.uid})
+      this.readRegistration()
+    }
+  }
+
+  readRegistration(){ //Retrieve the already registered classes from  the firebase db
+    this.courses=[]
+    let selectedCourses=[];
+    firebase.database().ref().child("registration").child(this.state.userId).once('value', (snapshot)=> //Retrieve the Id's of the classes the user has registered
+    {
+      snapshot.forEach((childSnapShot)=> { //Same as above
+        var ref = firebase.database().ref().child('courses').child(childSnapShot.val())
+        ref.once('value', (snap)=>{
+            selectedCourses.push({
+              key:snap.key,
+              title:snap.val().title,
+              code:snap.val().code,
+              credit:snap.val().credit,
+              description:snap.val().description,
+              level:snap.val().level,
+              semester:snap.val().semester,
+              selected: false
+            })
+            this.setState({selectedCourses, courses:this.courses})
+
+
+        })
+      })
+    })
+
+  }
+
+
+
+
   render() {
     return (
       <div id="page-wrapper">
@@ -36,14 +97,19 @@ export class Registered_classes extends Component {
                     <th>Semester</th>
                     </tr>
                 </thead>
-                <tbody>
-         <tr>
-            <td>Class Title</td>
-            <td>Course Code</td>
-            <td>Course Credit</td>
-            <td>Course Description</td>
-            <td>Course Semester</td></tr>
-            </tbody>
+
+                  <tbody>
+                    {this.state.selectedCourses.map((course, key)=>
+                        <tr key={key}>
+                        <td>{course.title}</td>
+                        <td>{course.code}</td>
+                        <td>{course.credit}</td>
+                        <td>{course.description}</td>
+                        <td>{course.semester}</td>
+                      </tr>
+                      )}
+                  </tbody>
+
         </table>
         </div>
         <div className="container" style={{marginBottom:50}} >

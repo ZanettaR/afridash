@@ -12,7 +12,9 @@ constructor(props){
     courses:[],
     preRegistration:[],
     registration:[],
+    registeredCourses:[],
     add:[],
+    userId: '',
     drop:[],
     courseIds: [],
     selectedCoursesID: [],
@@ -22,22 +24,21 @@ constructor(props){
     }
     this.handleCheckboxClick=this.handleCheckboxClick.bind(this)
     this.handleSubmit=this.handleSubmit.bind(this)
-    firebase.auth().onAuthStateChanged(this.handleUser.bind(this))
+    this.handleRemove=this.handleRemove.bind(this)
 }
-componentDidMount () {
+componentDidMount ()  {
+  let unsubscribe = firebase.auth().onAuthStateChanged(this.handleUser.bind(this));
+  unsubscribe();
 
-
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    // You can access `this.props` and `this.state` here
-    // This function should return a boolean, whether the component should re-render.
-    return true;
-  }
+}
 handleUser(user){
   if(user){
-    this.setState({userId:user.uid})
-    this.readPreRegistration()
-    this.readRegistration()
+    this.setState({userId:user.uid}, () => {
+      this.readPreRegistration()
+      this.readRegistration()
+      console.log(this.state);
+    })
+
   }
 }
 handleCheckboxClick (course, key) {
@@ -103,7 +104,9 @@ handleSubmit (event) {
 
   this.handleDelete() //Delete the courses that were selected to be registered from the preregistration db
   this.handleDrop() //Delete the courses that were selected for drop from the registration db
+  this.handleRemove()
   this.readRegistration() //Retrieve and display the current list of registered classes
+
 }
 //Remove courses from the display once they have been either registered or drop
 hideCourse(key, type){
@@ -164,6 +167,20 @@ readRegistration(){ //Retrieve the already registered classes from  the firebase
     })
   })
 
+}
+handleRemove(){
+  let  {dropCourses} = this.state
+dropCourses.map((course)=> {
+  firebase.database().ref().child('registeredCourses').child(course.key).once('value', (snapshot)=>{
+  snapshot.forEach((childSnapShot)=>{
+    if(childSnapShot.val() === this.state.userId){
+      childSnapShot.ref.remove() //Delete course using its reference
+      //this.hideCourse(course.key, 'drop')
+      }
+    })
+  })
+})
+this.setState({selectedCoursesID:[]})
 }
 handleRemoveCourse(key){
   //Remove course from firebase
